@@ -54,7 +54,8 @@ site_head("Home — Apartmani");
   </div>
 
   <!-- Overlay sadržaj (logo + „booking” kartica s kalendarom) -->
-  <div class="container relative z-10 flex flex-col items-center justify-center text-center">
+  <div class="relative z-10">
+  <div class="container flex flex-col items-center justify-center text-center">
     <!-- Desktop logo (kao u V0) -->
     <div class="hidden md:block mb-8 relative w-[410px] h-[310px]">
       <img
@@ -87,6 +88,7 @@ site_head("Home — Apartmani");
       <p class="mt-2 text-xs text-gray-500">Dva mjeseca pregleda, kao u v0.</p>
     </div>
   </div>
+</div>
 </section>
 
 <script>

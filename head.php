@@ -1,6 +1,7 @@
 <?php
-function site_head($title = "Apartmani") {
-echo <<<HTML
+function site_head($title = "Apartmani")
+{
+  echo <<<HTML
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,26 +14,42 @@ echo <<<HTML
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <style>
     :root{
-      /* V0 palette (from globals.css) */
-      --background: 43 38% 95%;
-      --border: 39 30% 85%;
-      --med-blue: 201 48% 44%;
-    }
-    .bg-mediterranean-beige{ background-color: hsl(var(--background)); }
-    .border-mediterranean-sand{ border-color: hsl(var(--border)); }
-    .text-mediterranean-blue{ color: hsl(var(--med-blue)); }
+  /* HSL sistem iz v0 (ostavi ako ti treba), ali dodamo i tačne HEX nijanse koje v0 koristi */
+  --background: 43 38% 95%;
+  --border: 39 30% 85%;
+  --med-blue: 201 48% 44%;
+
+  /* V0 HEX nijanse — ovo daje "zuckasti" ton */
+  --mediterranean-beige: #F5EFE0; /* header/papir */
+  --mediterranean-sand:  #E8DCCA; /* border */
+  --mediterranean-blue:  #3A7CA5; /* akcente */
+  --mediterranean-blue-dark: #2A5F8F;
+}
+    .bg-mediterranean-beige { background-color: var(--mediterranean-beige); }
+    .border-mediterranean-sand { border-color: var(--mediterranean-sand); }
+    .text-mediterranean-blue { color: var(--mediterranean-blue); }
     /* glass effect as in V0 */
-    .header-glass{
-      background-color: hsla(43,38%,95%,0.95);
+    .header-glass {
+      background-color: rgba(245, 239, 224, 0.95); /* #F5EFE0, 95% */
       backdrop-filter: blur(8px);
     }
-    @supports (backdrop-filter: blur(1px)){
-      .header-glass{ background-color: hsla(43,38%,95%,0.80); }
+    @supports (backdrop-filter: blur(1px)) {
+      .header-glass { background-color: rgba(245, 239, 224, 0.80); }
     }
+
+    .container{
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 768px){
+  .container{ padding-left: 2rem; padding-right: 2rem; }
+}
   </style>
 </head>
-<body class="bg-white text-gray-900">
-<header class="sticky top-0 z-40 w-full border-b border-mediterranean-sand header-glass">
+<body class="bg-mediterranean-beige text-gray-900">
+  <header class="sticky top-0 z-40 w-full border-b border-mediterranean-sand header-glass">
   <div class="container mx-auto flex h-16 items-center justify-between px-4">
     <!-- Logo (desktop + mobile) -->
     <a href="/apartmani-php/index.php" class="flex items-center space-x-2">
@@ -84,8 +101,9 @@ echo <<<HTML
 HTML;
 }
 
-function site_footer() {
-echo <<<HTML
+function site_footer()
+{
+  echo <<<HTML
 <footer class="border-t mt-12">
   <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-gray-500 flex items-center justify-between">
     <span>&copy; <?php echo date('Y'); ?> Apartmani</span>
