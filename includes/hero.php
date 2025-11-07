@@ -62,7 +62,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1M6 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2"/>
           </svg>
-          <span class="font-medium">Odaberite datume i goste</span>
+          <span class="font-medium">Odaberite datum:</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">

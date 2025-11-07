@@ -27,9 +27,9 @@
 .flatpickr-day:hover { background: rgba(58,124,165,0.10); }
 .flatpickr-day.today { border-color: var(--mediterranean-sand); }
 .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { background: var(--mediterranean-blue); border-color: var(--mediterranean-blue); color: #fff; }
-.flatpickr-day.inRange { background: rgba(58,124,165,0.12); border-color: transparent; }
+.flatpickr-day.inRange { border-color: transparent; }
 
 .input-sand { background: #fff; border: 1px solid var(--mediterranean-sand); outline: 0; }
 .input-sand:focus { box-shadow: 0 0 0 3px rgba(58,124,165,0.15); border-color: var(--mediterranean-blue); }
 
-.booking-card { background-color: rgba(255,255,255,0.88); border: 1px solid var(--mediterranean-sand); border-radius: 1rem; }
+.booking-card { background-color: rgba(245, 239, 224, 0.95); border: 1px solid var(--mediterranean-sand); border-radius: 1rem; }
