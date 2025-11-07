@@ -72,21 +72,49 @@ site_head("Home — Apartmani");
     </div>
 
     <!-- Kalendar (date range) u kartici -->
-    <div class="w-full max-w-md rounded-2xl bg-white/90 backdrop-blur border p-4 shadow">
-      <div class="flex items-center gap-2 mb-3">
-        <!-- lucide-calendar-days -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-mediterranean-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1M6 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2"/>
-        </svg>
-        <span class="font-medium">Odaberite datume</span>
-      </div>
-      <input id="dateRange" class="w-full rounded-md border border-mediterranean-sand px-3 py-2 text-sm" placeholder="Od — Do" />
-      <button class="mt-3 w-full px-4 py-2 rounded-lg bg-mediterranean-blue text-white hover:opacity-90">
-        Pretraži dostupnost
-      </button>
-      <p class="mt-2 text-xs text-gray-500">Dva mjeseca pregleda, kao u v0.</p>
+    <!-- Kalendar + Guests (V0-like) -->
+<div class="w-full max-w-md rounded-2xl booking-card backdrop-blur p-4 shadow">
+  <div class="flex items-center gap-2 mb-3">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-mediterranean-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1M6 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2"/>
+    </svg>
+    <span class="font-medium">Odaberite datume i goste</span>
+  </div>
+
+  <!-- grid: Date range + Guests + CTA -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+    <div class="sm:col-span-2">
+      <label for="dateRange" class="sr-only">Datumi</label>
+      <input id="dateRange"
+             class="input-sand w-full rounded-md px-3 py-2 text-sm"
+             placeholder="Od — Do" />
     </div>
+
+    <div>
+      <label for="guests" class="sr-only">Guests</label>
+      <select id="guests"
+              class="input-sand w-full rounded-md px-3 py-2 text-sm">
+        <option value="1">1 guest</option>
+        <option value="2" selected>2 guests</option>
+        <option value="3">3 guests</option>
+        <option value="4">4 guests</option>
+        <option value="5">5 guests</option>
+        <option value="6">6 guests</option>
+        <option value="6plus">6+ guests</option>
+      </select>
+    </div>
+
+    <button id="searchBtn"
+            class="sm:col-span-3 mt-1 w-full px-4 py-2 rounded-lg bg-mediterranean-blue text-white hover:opacity-90">
+      Pretraži dostupnost
+    </button>
+  </div>
+
+  <p class="mt-2 text-xs text-gray-600">Range s 2 mjeseca, beige/sand tonovi kao u v0.</p>
+</div>
+
+
   </div>
 </div>
 </section>
@@ -147,15 +175,31 @@ site_head("Home — Apartmani");
 
 // --- Date range (Flatpickr) ---
 // V0 ima range picker s 2 mjeseca (popover); ovdje ga prikazujemo u inputu s istim range ponašanjem. :contentReference[oaicite:8]{index=8}
+// --- Date range (Flatpickr) — V0-like tema i ponašanje ---
 document.addEventListener('DOMContentLoaded', function () {
   if (window.flatpickr) {
     flatpickr('#dateRange', {
       mode: 'range',
       dateFormat: 'M d, Y',
       defaultDate: [new Date(), new Date(Date.now() + 7*24*60*60*1000)],
-      // prikaz 2 mjeseca side-by-side kao u v0
-      showMonths: 2,
+      showMonths: 2,           // dva mjeseca side-by-side kao v0
+      minDate: 'today',
+      disableMobile: true,     // forsiraj web kalendar i na mobitelu
+      weekNumbers: false,      // (uključi ako v0 prikazuje sedmice)
+      // prev/next strelice mogu ostati default; Flatpickr boje smo prebojili CSS-om
     });
+
+    // (opcionalno) klik na CTA skuplja filtere
+    const btn = document.getElementById('searchBtn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const dates = (document.getElementById('dateRange').value || '').trim();
+        const guests = (document.getElementById('guests').value || '2');
+        // TODO: ovdje možeš dodati redirect/search sa query parametrima
+        // npr: window.location.href = `/apartmani-php/apartments.php?dates=${encodeURIComponent(dates)}&guests=${encodeURIComponent(guests)}`;
+        console.log('Search params ->', { dates, guests });
+      });
+    }
   }
 });
 </script>

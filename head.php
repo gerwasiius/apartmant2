@@ -50,6 +50,37 @@ function site_head($title = "Apartmani")
 @media (min-width: 768px){
   .container{ padding-left: 2rem; padding-right: 2rem; }
 }
+/* POPUP KALENDAR: sada potpuno bijel */
+.flatpickr-calendar {
+  background: #fff;                 /* BIJELO */
+  border: 1px solid #E8DCCA;        /* sand obrub */
+  box-shadow: 0 10px 20px rgba(0,0,0,.08);
+}
+.flatpickr-months,
+.flatpickr-weekdays {
+  background: #fff;                 /* bijela zaglavlja */
+  color: #2A5F8F;                   /* blue-dark */
+  font-weight: 600;
+  border-bottom: 1px solid #E8DCCA; /* suptilan separator */
+}
+.flatpickr-weekdays .flatpickr-weekday {
+  color: #2A5F8F;
+  opacity: .9;
+}
+.flatpickr-day { border-radius: 8px; }
+.flatpickr-day:hover { background: rgba(58,124,165,0.10); }
+.flatpickr-day.today { border-color: #E8DCCA; }
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: #3A7CA5;
+  border-color: #3A7CA5;
+  color: #fff;
+}
+.flatpickr-day.inRange {
+  background: rgba(58,124,165,0.12);
+  border-color: transparent;
+}
   </style>
 </head>
 <body class="bg-mediterranean-beige text-gray-900">
