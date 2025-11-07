@@ -24,10 +24,14 @@ function site_head($title = "Apartmani")
   --mediterranean-sand:  #E8DCCA; /* border */
   --mediterranean-blue:  #3A7CA5; /* akcente */
   --mediterranean-blue-dark: #2A5F8F;
+  --mediterranean-orange: #E67E22;
+  --mediterranean-orange-dark: #cf6d19;
 }
     .bg-mediterranean-beige { background-color: var(--mediterranean-beige); }
     .border-mediterranean-sand { border-color: var(--mediterranean-sand); }
     .text-mediterranean-blue { color: var(--mediterranean-blue); }
+    .bg-mediterranean-orange { background-color: var(--mediterranean-orange); }
+    .hover\:bg-mediterranean-orange-dark:hover { background-color: var(--mediterranean-orange-dark); }
     /* glass effect as in V0 */
     .header-glass {
       background-color: rgba(245, 239, 224, 0.95); /* #F5EFE0, 95% */
@@ -50,7 +54,7 @@ function site_head($title = "Apartmani")
 </head>
 <body class="bg-mediterranean-beige text-gray-900">
   <header class="sticky top-0 z-40 w-full border-b border-mediterranean-sand header-glass">
-  <div class="container mx-auto flex h-16 items-center justify-between px-4">
+  <div class="container flex h-16 items-center justify-between">
     <!-- Logo (desktop + mobile) -->
     <a href="/apartmani-php/index.php" class="flex items-center space-x-2">
       <div class="relative hidden md:block h-[50px] w-[120px] overflow-hidden">
@@ -69,11 +73,17 @@ function site_head($title = "Apartmani")
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-6">
-      <a href="/apartmani-php/index.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Početna</a>
-      <a href="/apartmani-php/apartments.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Apartmani</a>
-      <a href="/apartmani-php/about.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">O nama</a>
-    </nav>
+ <nav class="hidden md:flex items-center gap-6">
+   <a href="/apartmani-php/index.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Početna</a>
+   <a href="/apartmani-php/apartments.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Apartmani</a>
+   <a href="/apartmani-php/about.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">O nama</a>
+   <a href="/apartmani-php/contact.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Kontakt</a>
+   <a href="/apartmani-php/contact.php"
+      class="inline-flex items-center gap-2 rounded-full bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm font-medium">
+     <span class="inline-block w-2 h-2 rounded-full bg-white/90"></span>
+     Book Now
+   </a>
+</nav>
 
     <!-- Mobile menu button -->
     <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-md p-2 hover:bg-black/5" aria-label="Open menu">
@@ -87,6 +97,11 @@ function site_head($title = "Apartmani")
       <a href="/apartmani-php/index.php" class="text-sm font-medium">Početna</a>
       <a href="/apartmani-php/apartments.php" class="text-sm font-medium">Apartmani</a>
       <a href="/apartmani-php/about.php" class="text-sm font-medium">O nama</a>
+      <a href="/apartmani-php/contact.php"
+         class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm font-medium">
+        <span class="inline-block w-2 h-2 rounded-full bg-white/90"></span>
+        Book Now
+      </a>
     </nav>
   </div>
 </header>
