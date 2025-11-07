@@ -9,6 +9,8 @@ echo <<<HTML
   <title>{$title}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <style>
     :root{
       /* V0 palette (from globals.css) */
