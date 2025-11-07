@@ -81,6 +81,22 @@ function site_head($title = "Apartmani")
   background: rgba(58,124,165,0.12);
   border-color: transparent;
 }
+
+/* V0-like bež input prije fokusa; bijeli na focus/open */
+.input-sand{
+  background:#F5EFE0;              /* bež kao u v0 */
+  border:1px solid #E8DCCA;        /* sand rub */
+  color:#1f2937;
+  transition: background .15s, box-shadow .15s, border-color .15s;
+}
+.input-sand::placeholder{ color:#6b7280; }
+.input-sand:focus,
+.input-sand.is-open{               /* kad je kalendar otvoren */
+  background:#fff;
+  border-color:#3A7CA5;
+  outline:0;
+  box-shadow:0 0 0 3px rgba(58,124,165,.15);
+}
   </style>
 </head>
 <body class="bg-mediterranean-beige text-gray-900">

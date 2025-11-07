@@ -1,12 +1,13 @@
 <?php
-require_once __DIR__ . '/config/bootstrap.php';
-$apartments = load_apartments();
-site_head('Apartments — Apartmani');
+// Requires $apartments and url()
 ?>
-<main class="max-w-6xl mx-auto px-4 py-10">
-  <h1 class="text-3xl font-semibold mb-6">Apartments</h1>
+<section class="max-w-6xl mx-auto px-4 py-12">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-semibold">Featured apartments</h2>
+    <a class="text-sm underline" href="<?php echo url('apartments.php'); ?>">View all</a>
+  </div>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <?php foreach ($apartments as $a): ?>
+    <?php foreach (array_slice($apartments, 0, 6) as $a): ?>
       <a href="<?php echo url('apartment.php?id=' . urlencode((string)$a['id'])); ?>" class="group block border rounded-xl overflow-hidden hover:shadow transition">
         <div class="aspect-video bg-gray-100 overflow-hidden">
           <img src="<?php echo htmlspecialchars($a['images'][0]['url']); ?>" alt="<?php echo htmlspecialchars($a['images'][0]['alt']); ?>" class="w-full h-full object-cover group-hover:scale-105 transition" />
@@ -24,5 +25,4 @@ site_head('Apartments — Apartmani');
       </a>
     <?php endforeach; ?>
   </div>
-</main>
-<?php site_footer(); ?>
+</section>

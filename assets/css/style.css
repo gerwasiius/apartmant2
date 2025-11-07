@@ -1,0 +1,35 @@
+
+:root{
+  --background: 43 38% 95%;
+  --border: 39 30% 85%;
+  --med-blue: 201 48% 44%;
+  --mediterranean-beige: #F5EFE0;
+  --mediterranean-sand:  #E8DCCA;
+  --mediterranean-blue:  #3A7CA5;
+  --mediterranean-blue-dark: #2A5F8F;
+  --mediterranean-orange: #E67E22;
+  --mediterranean-orange-dark: #cf6d19;
+}
+.bg-mediterranean-beige { background-color: var(--mediterranean-beige); }
+.border-mediterranean-sand { border-color: var(--mediterranean-sand); }
+.text-mediterranean-blue { color: var(--mediterranean-blue); }
+.bg-mediterranean-orange { background-color: var(--mediterranean-orange); }
+.hover\:bg-mediterranean-orange-dark:hover { background-color: var(--mediterranean-orange-dark); }
+.header-glass { background-color: rgba(245, 239, 224, 0.95); backdrop-filter: blur(8px); }
+@supports (backdrop-filter: blur(1px)) { .header-glass { background-color: rgba(245, 239, 224, 0.80); } }
+.container { margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+@media (min-width: 768px){ .container{ padding-left: 2rem; padding-right: 2rem; } }
+
+.flatpickr-calendar { background: #fff; border: 1px solid var(--mediterranean-sand); box-shadow: 0 10px 20px rgba(0,0,0,.08); }
+.flatpickr-months, .flatpickr-weekdays { background: #fff; color: var(--mediterranean-blue-dark); font-weight: 600; border-bottom: 1px solid var(--mediterranean-sand); }
+.flatpickr-weekdays .flatpickr-weekday { color: var(--mediterranean-blue-dark); opacity: .9; }
+.flatpickr-day { border-radius: 8px; }
+.flatpickr-day:hover { background: rgba(58,124,165,0.10); }
+.flatpickr-day.today { border-color: var(--mediterranean-sand); }
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { background: var(--mediterranean-blue); border-color: var(--mediterranean-blue); color: #fff; }
+.flatpickr-day.inRange { background: rgba(58,124,165,0.12); border-color: transparent; }
+
+.input-sand { background: #fff; border: 1px solid var(--mediterranean-sand); outline: 0; }
+.input-sand:focus { box-shadow: 0 0 0 3px rgba(58,124,165,0.15); border-color: var(--mediterranean-blue); }
+
+.booking-card { background-color: rgba(255,255,255,0.88); border: 1px solid var(--mediterranean-sand); border-radius: 1rem; }
