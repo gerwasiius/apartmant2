@@ -1,6 +1,6 @@
 <?php
 ?>
-<section class="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 overflow-hidden">
+<section class="relative w-full min-h-[100svh] pb-12 md:pb-24 overflow-hidden">
   <div class="absolute inset-0 z-0 overflow-hidden" id="heroSlides">
     <div class="absolute inset-0 transition-opacity duration-1000 opacity-100 slide pointer-events-none">
       <img
@@ -41,7 +41,7 @@
     </button>
   </div>
 
-  <div class="relative z-10">
+  <div class="relative z-10 pointer-events-none">
     <div class="container flex flex-col items-center justify-center text-center">
       <div class="hidden md:block mb-8 relative w-[410px] h-[310px]">
         <img
@@ -54,7 +54,7 @@
           alt="Majstorić Apartments Logo - Mobile" class="object-contain w-full h-full drop-shadow" />
       </div>
 
-      <div class="w-full max-w-md rounded-2xl booking-card backdrop-blur p-4 shadow">
+      <div class="w-full max-w-md rounded-2xl booking-card backdrop-blur p-4 shadow pointer-events-auto">
         <div class="flex items-center gap-2 mb-3">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-mediterranean-blue" viewBox="0 0 24 24"
             fill="none" stroke="currentColor">
