@@ -34,3 +34,6 @@
 .input-sand:focus { box-shadow: 0 0 0 3px rgba(58,124,165,0.15); border-color: var(--mediterranean-blue); }
 
 .booking-card { background-color: rgba(245, 239, 224, 0.95); border: 1px solid var(--mediterranean-sand); border-radius: 1rem; }
+/* BOJE – dodaj ovo */
+.bg-mediterranean-blue { background-color: var(--mediterranean-blue); }
+.hover\:bg-mediterranean-blue-dark:hover { background-color: var(--mediterranean-blue-dark); }
