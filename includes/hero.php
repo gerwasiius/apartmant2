@@ -2,39 +2,39 @@
 ?>
 <section class="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 overflow-hidden">
   <div class="absolute inset-0 z-0 overflow-hidden" id="heroSlides">
-    <div class="absolute inset-0 transition-opacity duration-1000 opacity-100">
+    <div class="absolute inset-0 transition-opacity duration-1000 opacity-100 slide pointer-events-none">
       <img
         src="https://sssef5nrxfikvijy.public.blob.vercel-storage.com/cim_associated_03-sTrj0FWeVwaVLEx4LMu3XOJ1yQw7Ew.jpg"
         alt="Majstorić Apartments Medulin - Beachfront View" class="w-full h-full object-cover brightness-[0.7]">
     </div>
-    <div class="absolute inset-0 transition-opacity duration-1000 opacity-0">
+    <div class="absolute inset-0 transition-opacity duration-1000 opacity-0 slide pointer-events-none">
       <img
         src="https://sssef5nrxfikvijy.public.blob.vercel-storage.com/cim_associated_01-Zb3VWXlbwrDW4oSKbkxEFakJqBsHWF.jpg"
         alt="Majstorić Apartments Medulin - Pool Area" class="w-full h-full object-cover brightness-[0.7]">
     </div>
-    <div class="absolute inset-0 transition-opacity duration-1000 opacity-0">
+    <div class="absolute inset-0 transition-opacity duration-1000 opacity-0 slide pointer-events-none">
       <img
         src="https://sssef5nrxfikvijy.public.blob.vercel-storage.com/cim_associated_04-RXy7J36ANhk6TDY2xRPEv7nmFfhsSN.jpg"
         alt="Majstorić Apartments Medulin - Garden View" class="w-full h-full object-cover brightness-[0.7]">
     </div>
-    <div class="absolute inset-0 transition-opacity duration-1000 opacity-0">
+    <div class="absolute inset-0 transition-opacity duration-1000 opacity-0 slide pointer-events-none">
       <img
         src="https://sssef5nrxfikvijy.public.blob.vercel-storage.com/cim_associated_05-ku1RnxiewNhyHx2STxxzU8Rg3yacLR.jpg"
         alt="Majstorić Apartments Medulin - Apartment Interior" class="w-full h-full object-cover brightness-[0.7]">
     </div>
 
-    <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2 z-10" id="heroDots"></div>
+<div id="heroDots" class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2 z-20 pointer-events-auto"></div>
 
     <button id="heroPrev"
-      class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors z-10 hidden md:block"
-      aria-label="Previous image">
+  class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors z-20 pointer-events-auto hidden md:block"
+  aria-label="Previous image">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
     <button id="heroNext"
-      class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors z-10 hidden md:block"
-      aria-label="Next image">
+  class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors z-20 pointer-events-auto hidden md:block"
+  aria-label="Next image">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>

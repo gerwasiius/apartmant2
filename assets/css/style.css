@@ -37,3 +37,9 @@
 /* BOJE – dodaj ovo */
 .bg-mediterranean-blue { background-color: var(--mediterranean-blue); }
 .hover\:bg-mediterranean-blue-dark:hover { background-color: var(--mediterranean-blue-dark); }
+
+#heroDots .dot { width:8px; height:8px; border-radius:9999px; background:rgba(255,255,255,.6); }
+#heroDots .dot[aria-current="true"] { width:24px; background:#fff; }
+/* Hero slider clickability fixes */
+#heroSlides > .slide { pointer-events: none; }
+#heroPrev, #heroNext, #heroDots { pointer-events: auto; z-index: 20; }
