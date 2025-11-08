@@ -24,12 +24,13 @@
 .flatpickr-months, .flatpickr-weekdays { background: #fff; color: var(--mediterranean-blue-dark); font-weight: 600; border-bottom: 1px solid var(--mediterranean-sand); }
 .flatpickr-weekdays .flatpickr-weekday { color: var(--mediterranean-blue-dark); opacity: .9; }
 .flatpickr-day { border-radius: 8px; }
-.flatpickr-day:hover { background: rgba(58,124,165,0.10); }
+.flatpickr-day:hover { background: rgba(207,109,25,0.90); }
 .flatpickr-day.today { border-color: var(--mediterranean-sand); }
-.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { background: var(--mediterranean-blue); border-color: var(--mediterranean-blue); color: #fff; }
+.flatpickr-day.today:hover, .flatpickr-day.today:focus, .flatpickr-day.endRange:hover, .flatpickr-day.endRange:focus, .flatpickr-day.startRange:hover, .flatpickr-day.startRange:focus { background: rgba(207,109,25,0.90); border-color: var(--mediterranean-sand);}
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { background: var(--mediterranean-orange); border-color: var(--mediterranean-orange); color: #fff; }
 .flatpickr-day.inRange { border-color: transparent; }
 
-.input-sand { background: #fff; border: 1px solid var(--mediterranean-sand); outline: 0; }
+/* .input-sand { background: #fff; border: 1px solid var(--mediterranean-sand); outline: 0; } */
 .input-sand:focus { box-shadow: 0 0 0 3px rgba(58,124,165,0.15); border-color: var(--mediterranean-blue); }
 
 .booking-card { background-color: rgba(245, 239, 224, 0.95); border: 1px solid var(--mediterranean-sand); border-radius: 1rem; }
