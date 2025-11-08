@@ -85,10 +85,38 @@ function site_footer(): void {
 
   echo <<<HTML
   <footer class="border-t mt-12">
-    <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-gray-500 flex items-center justify-between">
-      <span>&copy; {$year} Apartmani</span>
-      <span class="flex items-center gap-2"><i data-lucide="star"></i><span>Made to match V0</span></span>
+<div class="container foot-grid">
+  <div class="foot-brand">
+    <div class="foot-logo">Majstorić Apartments</div>
+  </div>
+
+  <nav class="foot-col">
+    <ul class="foot-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/apartments">Apartments</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="foot-col">
+    <address class="foot-contact">
+      <div>123 Coastal Road, Medulin, Croatia</div>
+      <div><a href="tel:+385123456789">+385 12 345 6789</a></div>
+      <div><a href="mailto:info@majstoricapartments.com">info@majstoricapartments.com</a></div>
+    </address>
+    <div class="foot-social">
+      <a aria-label="Facebook" href="#"><?php /* SVG iz primjera */ ?></a>
+      <a aria-label="Instagram" href="#"><?php /* SVG */ ?></a>
+      <a aria-label="Twitter" href="#"><?php /* SVG */ ?></a>
     </div>
+  </div>
+</div>
+
+<div class="container foot-copy">
+  <hr />
+  <p>© <?= date('Y') ?> Majstorić Apartments.</p>
+</div>
   </footer>
   <script src="{$base}/assets/js/slider.js"></script>
   <script src="{$base}/assets/js/calendar.js"></script>
@@ -97,3 +125,4 @@ function site_footer(): void {
 </html>
 HTML;
 }
+

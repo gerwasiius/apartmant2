@@ -162,19 +162,3 @@ function site_head($title = "Apartmani")
 </script>
 HTML;
 }
-
-function site_footer()
-{
-  echo <<<HTML
-<footer class="border-t mt-12">
-  <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-gray-500 flex items-center justify-between">
-    <span>&copy; <?php echo date('Y'); ?> Apartmani</span>
-    <span class="flex items-center gap-2"><i data-lucide="star"></i> <span>Made to match V0</span></span>
-  </div>
-</footer>
-<script>if (window.lucide) { lucide.createIcons(); }</script>
-</body>
-</html>
-HTML;
-}
-?>
