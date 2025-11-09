@@ -17,6 +17,8 @@ function site_head(string $title = 'Apartmani'): void {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <link rel="stylesheet" href="{$base}/assets/css/style.css">
+  <link rel="stylesheet" href="{$base}/assets/css/cta.css">
+<link rel="stylesheet" href="{$base}/assets/css/location.css">
 </head>
 <body class="bg-mediterranean-beige text-gray-900">
   <header class="sticky top-0 z-40 w-full border-b border-mediterranean-sand header-glass">

@@ -1,0 +1,38 @@
+/* CTA section (ex-includes/cta.php) */
+.cta-wrap {
+  background: #FAF7EE;        /* ostavi specifičnu pozadinu sekcije */
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid #FBF3E3;
+}
+
+/* scoped container — NE diramo globalnu .container definiciju */
+.cta-wrap .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Naslovi/tekst */
+.cta-title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  color: var(--mediterranean-blue-dark);
+  margin: 0 0 .5rem;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.cta-sub {
+  color: #6b7280;
+  margin: 0 0 1.25rem;
+}
+
+/* Akcije */
+.cta-actions {
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Dugmad su Tailwind u markupu, pa ovdje ne trebaju posebna pravila */

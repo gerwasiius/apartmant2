@@ -71,7 +71,10 @@ footer{ background:#FBF3E3; }
 .foot-copy{ text-align:center; padding-top:1rem; }
 .foot-copy hr{ border:0; height:1px; background:#e5e7eb; margin:1rem 0; }
 .foot-copy p{ color:#6b7280; margin:.5rem 0 1rem; font-size:.95rem; }
-
+footer.border-t { padding-top: 12px; }
+@media (min-width: 768px){
+  footer.border-t { padding-top: 16px; }
+}
 /* Featured apartments component styles (extracted) */
 :root {
   --med-beige: #F5EFE0;
@@ -159,6 +162,17 @@ footer{ background:#FBF3E3; }
 
 /* ====== Calendar input override: make the date input white ====== */
 /* Flatpickr adds .flatpickr-input to the original input; we force white bg. */
+
+.input-sand-apartments {
+  background: var(--mediterranean-beige);
+  border: 1px solid var(--mediterranean-beige);
+  outline: 0;
+}
+.input-sand-apartments:focus {
+  box-shadow: 0 0 0 3px rgba(58,124,165,0.15);
+  border-color: var(--mediterranean-blue);
+}
+
 #dateRange,
 #dateRange.flatpickr-input,
 .ap-sidebar #dateRange,

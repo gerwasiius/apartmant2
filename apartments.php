@@ -4,8 +4,8 @@ $apartments = load_apartments();
 site_head('Apartments - Apartmani');
 ?>
 <main class="min-h-[60vh] bg-[#FAF7EE]">
-   <section class="border-b border-black/5 bg-mediterranean-sand-dark">
-    <div class="container mx-auto px-4 py-12 md:py-16">
+   <section class="border-b border-black/5 bg-white">
+    <div class="container mx-auto px-4 py-12 md:py-12">
       <h1 class="text-4xl md:text-5xl font-medium tracking-tight">Our Apartments</h1>
       <p class="mt-3 md:mt-4 text-lg md:text-xl max-w-3xl">Discover your perfect home away from home in Medulin</p>
     </div>
@@ -30,7 +30,7 @@ site_head('Apartments - Apartmani');
             </div>
             <label for="dateRange" class="sr-only">Dates</label>
             <!-- IMPORTANT: same id as on homepage so calendar.js picks it up -->
-            <input id="dateRange" class="input-sand w-full rounded-md px-3 py-2 text-sm" placeholder="From — To" />
+            <input id="dateRange" class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm" placeholder="From — To" />
           </div>
 
           <!-- Guests -->
@@ -48,7 +48,7 @@ site_head('Apartments - Apartmani');
             </div>
             <label for="guests" class="sr-only">Guests</label>
             <!-- IMPORTANT: same id as on homepage so click handler keeps working -->
-            <select id="guests" class="input-sand w-full rounded-md px-3 py-2 text-sm">
+            <select id="guests" class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm">
               <option value="1">1 guest</option>
               <option value="2" selected>2 guests</option>
               <option value="3">3 guests</option>
