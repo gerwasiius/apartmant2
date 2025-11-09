@@ -3,7 +3,7 @@ require_once __DIR__ . '/config/bootstrap.php';
 $id = $_GET['id'] ?? null;
 $apt = $id ? find_apartment($id) : null;
 if (!$apt) { http_response_code(404); echo "Not found"; exit; }
-site_head($apt['name'] . ' — Apartmani');
+site_head($apt['name'] . ' - Apartmani');
 ?>
 <main class="max-w-5xl mx-auto px-4 py-10">
   <a href="<?php echo url('apartments.php'); ?>" class="text-sm underline">&larr; Back</a>
@@ -29,3 +29,4 @@ site_head($apt['name'] . ' — Apartmani');
   </div>
 </main>
 <?php site_footer(); ?>
+

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/config/bootstrap.php';
-site_head('Contact — Apartmani');
+site_head('Contact - Apartmani');
 ?>
 <main class="max-w-4xl mx-auto px-4 py-10 prose">
   <h1>Kontakt</h1>
@@ -11,3 +11,4 @@ site_head('Contact — Apartmani');
   </ul>
 </main>
 <?php site_footer(); ?>
+

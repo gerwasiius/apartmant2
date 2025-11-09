@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!window.flatpickr) return;
 
   const el = document.querySelector("#dateRange");
+  if (!el) return;
 
   const hrLocale = {
     weekdays: {
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ],
     },
     firstDayOfWeek: 1,
-    rangeSeparator: " — ",
+    rangeSeparator: " – ",
     weekAbbreviation: "Tj.",
     scrollTitle: "Pomaknite za promjenu",
     toggleTitle: "Kliknite za prebacivanje",
@@ -27,9 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   flatpickr(el, {
     mode: "range",
-    // vrijednost u inputu (za backend) — ISO
     dateFormat: "Y-m-d",
-    // ono što korisnik vidi
     altInput: true,
     altFormat: "d. M Y",
     defaultDate: [new Date(), new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)],
@@ -44,9 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("searchBtn");
   if (btn) {
     btn.addEventListener("click", () => {
-      const raw = (document.getElementById("dateRange").value || "").trim(); // "YYYY-MM-DD — YYYY-MM-DD"
+      const raw = (document.getElementById("dateRange").value || "").trim();
       const guests = (document.getElementById("guests").value || "2");
       console.log("Search params ->", { dates: raw, guests });
     });
   }
 });
+

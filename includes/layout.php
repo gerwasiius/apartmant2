@@ -92,10 +92,10 @@ function site_footer(): void {
 
   <nav class="foot-col">
     <ul class="foot-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/apartments">Apartments</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/contact">Contact</a></li>
+      <li><a href="{$base}/index.php">Home</a></li>
+      <li><a href="{$base}/apartments.php">Apartments</a></li>
+      <li><a href="{$base}/about.php">About</a></li>
+      <li><a href="{$base}/contact.php">Contact</a></li>
     </ul>
   </nav>
 
@@ -120,6 +120,7 @@ function site_footer(): void {
   </footer>
   <script src="{$base}/assets/js/slider.js"></script>
   <script src="{$base}/assets/js/calendar.js"></script>
+  <script src="{$base}/assets/js/featured-carousel.js"></script>
   <script>if (window.lucide) { lucide.createIcons(); }</script>
 </body>
 </html>

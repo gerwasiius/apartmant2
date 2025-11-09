@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/config/bootstrap.php';
 $apartments = load_apartments();
-site_head('Home — Apartmani');
+site_head('Home - Apartmani');
 ?>
 <main>
   <?php include __DIR__ . '/includes/hero.php'; ?>
@@ -10,3 +10,4 @@ site_head('Home — Apartmani');
   <?php include __DIR__ . '/includes/cta.php'; ?>
 </main>
 <?php site_footer(); ?>
+

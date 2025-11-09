@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/config/bootstrap.php';
 $apartments = load_apartments();
-site_head('Apartments — Apartmani');
+site_head('Apartments - Apartmani');
 ?>
 <main class="max-w-6xl mx-auto px-4 py-10">
   <h1 class="text-3xl font-semibold mb-6">Apartments</h1>
@@ -26,3 +26,4 @@ site_head('Apartments — Apartmani');
   </div>
 </main>
 <?php site_footer(); ?>
+
