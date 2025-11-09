@@ -5,6 +5,7 @@
   --med-blue: 201 48% 44%;
   --mediterranean-beige: #F5EFE0;
   --mediterranean-sand:  #E8DCCA;
+  --mediterranean-sand-dark: #ede8de;
   --mediterranean-blue:  #3A7CA5;
   --mediterranean-blue-dark: #2A5F8F;
   --mediterranean-orange: #E67E22;
@@ -12,7 +13,9 @@
 }
 .bg-mediterranean-beige { background-color: var(--mediterranean-beige); }
 .border-mediterranean-sand { border-color: var(--mediterranean-sand); }
+.bg-mediterranean-sand-dark { background-color: var(--mediterranean-sand-dark); }
 .text-mediterranean-blue { color: var(--mediterranean-blue); }
+.bg-mediterranean-blue { background-color: var(--mediterranean-blue); }
 .bg-mediterranean-orange { background-color: var(--mediterranean-orange); }
 .hover\:bg-mediterranean-orange-dark:hover { background-color: var(--mediterranean-orange-dark); }
 .header-glass { background-color: rgba(245, 239, 224, 0.95); backdrop-filter: blur(8px); }
