@@ -84,7 +84,7 @@ function site_footer(): void {
   $year = date('Y');
 
   echo <<<HTML
-  <footer class="border-t mt-12">
+  <footer class="border-t">
 <div class="container foot-grid">
   <div class="foot-brand">
     <div class="foot-logo">Majstorić Apartments</div>

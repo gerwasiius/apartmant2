@@ -24,13 +24,14 @@ $copyright = '© 2025 Majstorić Apartments.';
 $cta_title = 'Ready to Book Your Stay?';
 $cta_subtitle = 'Contact us today to reserve your perfect apartment in Medulin';
 ?>
-<section class="cta container">
-  <hr class="cta-hr" />
-  <h2 class="cta-title"><?= htmlspecialchars($cta_title) ?></h2>
-  <p class="cta-sub"><?= htmlspecialchars($cta_subtitle) ?></p>
-  <div class="cta-actions">
-    <a class="btn btn-primary" href="/apartments">View All Apartments</a>
-    <a class="btn btn-ghost" href="/contact">Contact Us</a>
+<section class="cta-wrap">
+  <div class="container">
+    <h2 class="cta-title"><?= htmlspecialchars($cta_title) ?></h2>
+    <p class="cta-sub"><?= htmlspecialchars($cta_subtitle) ?></p>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="/apartments">View All Apartments</a>
+      <a class="btn btn-ghost" href="/contact">Contact Us</a>
+    </div>
   </div>
 </section>
 
@@ -50,6 +51,14 @@ $cta_subtitle = 'Contact us today to reserve your perfect apartment in Medulin';
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+  }
+
+
+  .cta-wrap {
+    background: #FAF7EE;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid #FBF3E3;
   }
 
   /* CTA */

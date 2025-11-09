@@ -102,10 +102,16 @@ $attractions = [
 .loc-item-desc{color:var(--muted);margin:.2rem 0 0;font-size:.95rem;line-height:1.35;}
 
 .loc-map-wrap{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.08);background:#f3f4f6;}
-.loc-map-iframe{display:block;width:100%;height:0;padding-bottom:100%; /* square on mobile */
-  border:0;}
-@media (min-width:768px){.loc-map-iframe{padding-bottom:66%;}} /* ~16:9 on desktop */
-
+.loc-map-iframe{
+  display:block;
+  width:100%;
+  height:320px;          /* mobilni/tabla */
+  aspect-ratio:16 / 9;   /* moderni browseri -> zadrži proporciju */
+  border:0;
+}
+@media (min-width:768px){
+  .loc-map-iframe{ height:420px; }  /* desktop */
+}
 /* overlay s gradijentom kao u v0 */
 .loc-map-overlay{
   pointer-events:none;
