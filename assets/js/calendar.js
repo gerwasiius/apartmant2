@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
     time_24hr: true,
   };
 
-  flatpickr(el, {
+  el.value = "";
+  const fp = flatpickr(el, {
     mode: "range",
     dateFormat: "Y-m-d",
     altInput: true,
     altFormat: "d. M Y",
-    // defaultDate: [new Date(), new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)],
     showMonths: 2,
     minDate: "today",
     disableMobile: true,
@@ -40,12 +40,46 @@ document.addEventListener("DOMContentLoaded", function () {
     onClose: () => el.classList.remove("is-open"),
   });
 
-  const btn = document.getElementById("searchBtn");
+   const url = new URL(window.location.href);
+  const from = url.searchParams.get("from");
+  const to   = url.searchParams.get("to");
+  const guestsSel = document.getElementById("guests");
+  const guests = url.searchParams.get("guests");
+
+  if (from && to) {
+    try { fp.setDate([from, to], true); } catch(e) {}
+  }
+  if (guestsSel && guests) {
+    guestsSel.value = guests;
+  }
+
+const btn = document.getElementById("searchBtn");
   if (btn) {
     btn.addEventListener("click", () => {
       const raw = (document.getElementById("dateRange").value || "").trim();
-      const guests = (document.getElementById("guests").value || "2");
-      console.log("Search params ->", { dates: raw, guests });
+      const guestsSel = document.getElementById("guests");
+      const guests = (guestsSel && guestsSel.value) ? guestsSel.value : "";
+
+      // Izvuci YYYY-MM-DD ... YYYY-MM-DD iz raw vrijednosti (radi i za " – ")
+      const m = raw.replace('—','-').replace('–','-')
+                   .match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
+      const from = m ? m[1] : "";
+      const to   = m ? m[2] : "";
+
+      // Odredi odredište (home i listing → apartments.php, detalj → apartment.php?id=..)
+      const url = new URL(window.location.href);
+      const id  = url.searchParams.get("id");
+      let target = "apartments.php";
+      if (url.pathname.includes("apartment.php") && id) {
+        target = `apartment.php?id=${encodeURIComponent(id)}`;
+      }
+
+      const dest = new URL(target, window.location.origin);
+      if (from) dest.searchParams.set("from", from);
+      if (to)   dest.searchParams.set("to", to);
+      if (guests) dest.searchParams.set("guests", guests);
+
+      window.location.href = dest.toString();
     });
   }
 });

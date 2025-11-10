@@ -82,8 +82,9 @@
           </div>
           <label for="guests" class="sr-only">Gosti</label>
           <select id="guests" class="input-sand rounded-md px-3 py-2 text-sm">
+            <option value="" selected disabled hidden>Broj gostiju</option>
             <option value="1">1 gost</option>
-            <option value="2" selected>2 gosta</option>
+            <option value="2">2 gosta</option>
             <option value="3">3 gosta</option>
             <option value="4">4 gosta</option>
           </select>

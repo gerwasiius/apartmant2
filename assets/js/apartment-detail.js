@@ -80,14 +80,17 @@
 
     nightsH.value = String(n);
     totalH.value = String(total);
-    guestsH.value = guests ? guests.value : '1';
+    guestsH.value = guests ? (guests.value || '') : '';
 
-    if (from && to && n>0) {
+    const guestsOk = !!(guests && guests.value);
+    if (from && to && n>0 && guestsOk) {
       fromH.value = from.toISOString().slice(0,10);
       toH.value = to.toISOString().slice(0,10);
       bookBtn.disabled = false;
     } else {
-      fromH.value = ''; toH.value=''; bookBtn.disabled = true;
+      fromH.value = '';
+      toH.value = '';
+      bookBtn.disabled = true;
     }
   }
 
