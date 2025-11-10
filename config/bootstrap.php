@@ -1,7 +1,16 @@
 <?php
 declare(strict_types=1);
 
-define('APP_BASE', '/apartmani-php'); // prilagođeno tvom XAMPP folderu
+// Auto-detect APP_BASE (works when site is in a subfolder like /apartmani-php or in root)
+$scriptName = $_SERVER['SCRIPT_NAME'] ?? '/';
+$scriptDir  = rtrim(dirname($scriptName), '\/');
+if ($scriptDir === '.' || $scriptDir === '/') {
+    $appBase = '';
+} else {
+    $appBase = $scriptDir;
+}
+define('APP_BASE', $appBase);
+// prilagođeno tvom XAMPP folderu
 require_once __DIR__ . '/../src/data.php';
 require_once __DIR__ . '/../includes/layout.php';
 

@@ -38,51 +38,19 @@ document.addEventListener("DOMContentLoaded", function () {
     locale: hrLocale,
     onOpen: () => el.classList.add("is-open"),
     onClose: () => el.classList.remove("is-open"),
-    onChange: (selectedDates, dateStr) => {
-      try {
-        const m = dateStr.replace('—','-').replace('–','-')
-          .match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
-        const from = m ? m[1] : "";
-        const to   = m ? m[2] : "";
-        if (from && to) {
-          localStorage.setItem("booking.from", from);
-          localStorage.setItem("booking.to", to);
-        }
-      } catch (e) {}
-    }
   });
 
-    // --- URL ili localStorage hydrate ---
-  const url = new URL(window.location.href);
-  let from = url.searchParams.get("from");
-  let to   = url.searchParams.get("to");
+   const url = new URL(window.location.href);
+  const from = url.searchParams.get("from");
+  const to   = url.searchParams.get("to");
   const guestsSel = document.getElementById("guests");
-  let guests = url.searchParams.get("guests");
-if (!from) from = localStorage.getItem("booking.from") || "";
-  if (!to)   to   = localStorage.getItem("booking.to") || "";
-  if (!guests) guests = localStorage.getItem("booking.guests") || "";
+  const guests = url.searchParams.get("guests");
 
   if (from && to) {
-    try { 
-      // true => triggerChange (važno za flatpickr)
-      fp.setDate([from, to], true);
-      // dodatno: emitiraj native change na inputu (za druge liste/skripte)
-      el.dispatchEvent(new Event("change", { bubbles: true }));
-    } catch(e) {}
+    try { fp.setDate([from, to], true); } catch(e) {}
   }
   if (guestsSel && guests) {
     guestsSel.value = guests;
-    // NEW: obavezno emitiraj change da oživi kalkulacije/validaciju
-    guestsSel.dispatchEvent(new Event("change", { bubbles: true }));
-  }
-
-  // NEW: spremanje izbora gostiju
-  if (guestsSel) {
-    guestsSel.addEventListener("change", () => {
-      if (guestsSel.value) {
-        localStorage.setItem("booking.guests", guestsSel.value);
-      }
-    });
   }
 
 const btn = document.getElementById("searchBtn");
@@ -106,7 +74,11 @@ const btn = document.getElementById("searchBtn");
         target = `apartment.php?id=${encodeURIComponent(id)}`;
       }
 
-      const dest = new URL(target, window.location.origin);
+      // Build dest using APP_BASE if provided (supports subfolder installs)
+      const base = (window.APP_BASE || '').replace(/\/$/, ''); // "" or "/apartmani-php"
+      const cleanedTarget = String(target).replace(/^\/+/, ''); // remove leading slashes
+      const finalPath = (base ? base + '/' : '/') + cleanedTarget;
+      const dest = new URL(finalPath, window.location.origin);
       if (from) dest.searchParams.set("from", from);
       if (to)   dest.searchParams.set("to", to);
       if (guests) dest.searchParams.set("guests", guests);
@@ -115,4 +87,3 @@ const btn = document.getElementById("searchBtn");
     });
   }
 });
-
