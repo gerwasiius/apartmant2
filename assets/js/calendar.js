@@ -38,19 +38,51 @@ document.addEventListener("DOMContentLoaded", function () {
     locale: hrLocale,
     onOpen: () => el.classList.add("is-open"),
     onClose: () => el.classList.remove("is-open"),
+    onChange: (selectedDates, dateStr) => {
+      try {
+        const m = dateStr.replace('—','-').replace('–','-')
+          .match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
+        const from = m ? m[1] : "";
+        const to   = m ? m[2] : "";
+        if (from && to) {
+          localStorage.setItem("booking.from", from);
+          localStorage.setItem("booking.to", to);
+        }
+      } catch (e) {}
+    }
   });
 
-   const url = new URL(window.location.href);
-  const from = url.searchParams.get("from");
-  const to   = url.searchParams.get("to");
+    // --- URL ili localStorage hydrate ---
+  const url = new URL(window.location.href);
+  let from = url.searchParams.get("from");
+  let to   = url.searchParams.get("to");
   const guestsSel = document.getElementById("guests");
-  const guests = url.searchParams.get("guests");
+  let guests = url.searchParams.get("guests");
+if (!from) from = localStorage.getItem("booking.from") || "";
+  if (!to)   to   = localStorage.getItem("booking.to") || "";
+  if (!guests) guests = localStorage.getItem("booking.guests") || "";
 
   if (from && to) {
-    try { fp.setDate([from, to], true); } catch(e) {}
+    try { 
+      // true => triggerChange (važno za flatpickr)
+      fp.setDate([from, to], true);
+      // dodatno: emitiraj native change na inputu (za druge liste/skripte)
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+    } catch(e) {}
   }
   if (guestsSel && guests) {
     guestsSel.value = guests;
+    // NEW: obavezno emitiraj change da oživi kalkulacije/validaciju
+    guestsSel.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  // NEW: spremanje izbora gostiju
+  if (guestsSel) {
+    guestsSel.addEventListener("change", () => {
+      if (guestsSel.value) {
+        localStorage.setItem("booking.guests", guestsSel.value);
+      }
+    });
   }
 
 const btn = document.getElementById("searchBtn");
