@@ -28,9 +28,9 @@ $cta_subtitle = 'Contact us today to reserve your perfect apartment in Medulin';
   <div class="container">
     <h2 class="cta-title"><?= htmlspecialchars($cta_title) ?></h2>
     <p class="cta-sub"><?= htmlspecialchars($cta_subtitle) ?></p>
-    <div class="cta-actions">
-      <a class="btn btn-primary" href="/apartments">View All Apartments</a>
-      <a class="btn btn-ghost" href="/contact">Contact Us</a>
+     <div class="mt-6 flex justify-center gap-4">
+      <a class="btn btn-primary" href="<?php echo htmlspecialchars(url('apartments.php')); ?>">View All Apartments</a>
+      <a class="btn btn-ghost"  href="<?php echo htmlspecialchars(url('contact.php')); ?>">Contact Us</a>
     </div>
   </div>
 </section>
