@@ -155,4 +155,4 @@ site_head(htmlspecialchars($apt['name']).' - Apartmani');
 </main>
 
 <?php site_footer(); ?>
-<script src="/assets/js/apartment-detail.js"></script>
+<script src="<?php echo url('assets/js/apartment-detail.js'); ?>"></script>

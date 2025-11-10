@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dateFormat: "Y-m-d",
     altInput: true,
     altFormat: "d. M Y",
-    defaultDate: [new Date(), new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)],
+    // defaultDate: [new Date(), new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)],
     showMonths: 2,
     minDate: "today",
     disableMobile: true,
