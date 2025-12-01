@@ -1,13 +1,22 @@
 <?php
 declare(strict_types=1);
 
-function site_head(string $title = 'Apartmani'): void {
+function site_head(string $title = 'Apartmani'): void
+{
   $base = rtrim(APP_BASE, '/');
   $year = date('Y');
+  $langAttr = htmlspecialchars(current_lang(), ENT_QUOTES);
+  $navHome = t('nav.home');
+  $navApts = t('nav.apartments');
+  $navAbout = t('nav.about');
+  $navContact = t('nav.contact');
+  $navBookNow = t('nav.book_now');
+  $appName = t('app.name');
+  $lang = current_lang();
 
   echo <<<HTML
 <!doctype html>
-<html lang="en">
+<html lang="{$langAttr}">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,15 +50,25 @@ function site_head(string $title = 'Apartmani'): void {
       </a>
 
       <nav class="hidden md:flex items-center gap-6">
-        <a href="{$base}/index.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Početna</a>
-        <a href="{$base}/apartments.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Apartmani</a>
-        <a href="{$base}/about.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">O nama</a>
-        <a href="{$base}/contact.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Kontakt</a>
+        <a href="{$base}/index.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navHome}</a>
+        <a href="{$base}/apartments.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navApts}</a>
+        <a href="{$base}/about.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navAbout}</a>
+        <a href="{$base}/contact.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navContact}</a>
         <a href="{$base}/contact.php"
            class="inline-flex items-center gap-2 rounded-full bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm font-medium">
           <span class="inline-block w-2 h-2 rounded-full bg-white/90"></span>
-          Book Now
+          {$navBookNow}
         </a>
+
+         <div class="hidden md:flex items-center gap-2 text-xs">
+        <a href="{$base}{$_SERVER['PHP_SELF']}?lang=hr" class="underline-offset-2 hover:underline">HR</a>
+        <span>|</span>
+        <a href="{$base}{$_SERVER['PHP_SELF']}?lang=en" class="underline-offset-2 hover:underline">EN</a>
+        <span>|</span>
+        <a href="{$base}{$_SERVER['PHP_SELF']}?lang=de" class="underline-offset-2 hover:underline">DE</a>
+        <span>|</span>
+        <a href="{$base}{$_SERVER['PHP_SELF']}?lang=fr" class="underline-offset-2 hover:underline">FR</a>
+      </div>
       </nav>
 
       <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-md p-2 hover:bg-black/5" aria-label="Open menu">
@@ -61,13 +80,13 @@ function site_head(string $title = 'Apartmani'): void {
 
     <div id="mobileNav" class="md:hidden hidden border-t border-mediterranean-sand bg-mediterranean-beige/95 backdrop-blur">
       <nav class="container mx-auto px-4 py-3 flex flex-col gap-3">
-        <a href="{$base}/index.php" class="text-sm font-medium">Početna</a>
-        <a href="{$base}/apartments.php" class="text-sm font-medium">Apartmani</a>
-        <a href="{$base}/about.php" class="text-sm font-medium">O nama</a>
+        <a href="{$base}/index.php" class="text-sm font-medium">{$navHome}</a>
+        <a href="{$base}/apartments.php" class="text-sm font-medium">{$navApts}</a>
+        <a href="{$base}/about.php" class="text-sm font-medium">{$navAbout}</a>
         <a href="{$base}/contact.php"
            class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm font-medium">
           <span class="inline-block w-2 h-2 rounded-full bg-white/90"></span>
-          Book Now
+          {$navBookNow}
         </a>
       </nav>
     </div>
@@ -82,9 +101,16 @@ function site_head(string $title = 'Apartmani'): void {
 HTML;
 }
 
-function site_footer(): void {
+function site_footer(): void
+{
   $base = rtrim(APP_BASE, '/');
   $year = date('Y');
+
+  $fHome = t('footer.home');
+  $fApts = t('footer.apartments');
+  $fAbout = t('footer.about');
+  $fCont = t('footer.contact');
+  $copy = t('footer.copy', ['year' => $year]);
 
   echo <<<HTML
   <footer class="border-t bg-mediterranean-beige">
@@ -97,10 +123,10 @@ function site_footer(): void {
       <!-- Quick links -->
       <nav class="foot-col">
         <ul class="foot-links">
-          <li><a href="{$base}/index.php">Home</a></li>
-          <li><a href="{$base}/apartments.php">Apartments</a></li>
-          <li><a href="{$base}/about.php">About</a></li>
-          <li><a href="{$base}/contact.php">Contact</a></li>
+          <li><a href="{$base}/index.php">{$fHome}</a></li>
+          <li><a href="{$base}/apartments.php">{$fApts}</a></li>
+          <li><a href="{$base}/about.php">{$fAbout}</a></li>
+          <li><a href="{$base}/contact.php">{$fCont}</a></li>
         </ul>
       </nav>
 
