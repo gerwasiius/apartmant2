@@ -1,22 +1,32 @@
 <?php
 require_once __DIR__ . '/config/bootstrap.php';
 $apartments = load_apartments();
-site_head('Apartments - Apartmani');
+
+$count = count($apartments);
+$countText = t('page.apartments.showing', ['count' => $count]);
+
+site_head(t('page.apartments.title') . ' - Apartmani');
 ?>
 <main class="min-h-[60vh] bg-[#FAF7EE]">
   <section class="border-b border-black/5 bg-white">
     <div class="container mx-auto px-4 py-12 md:py-12">
-      <h1 class="text-4xl md:text-5xl font-medium tracking-tight">Our Apartments</h1>
-      <p class="mt-3 md:mt-4 text-lg md:text-xl max-w-3xl">Discover your perfect home away from home in Medulin</p>
+      <h1 class="text-4xl md:text-5xl font-medium tracking-tight">
+        <?= htmlspecialchars(t('page.apartments.title')) ?>
+      </h1>
+      <p class="mt-3 md:mt-4 text-lg md:text-xl max-w-3xl">
+        <?= htmlspecialchars(t('page.apartments.subtitle')) ?>
+      </p>
     </div>
   </section>
   <div class="container mx-auto px-4 py-10">
-    <!-- Page title -->
+    <!-- Page content -->
     <div class="grid gap-8 md:grid-cols-[300px_1fr]">
       <!-- LEFT: Search panel (reuses home booking UI + IDs) -->
       <aside>
         <div class="rounded-xl border border-mediterranean-sand bg-white p-4 shadow-sm">
-          <h2 class="text-lg font-semibold mb-4">Search Apartments</h2>
+          <h2 class="text-lg font-semibold mb-4">
+            <?= htmlspecialchars(t('page.apartments.search_box_title')) ?>
+          </h2>
 
           <!-- Dates -->
           <div class="mb-3">
@@ -26,12 +36,19 @@ site_head('Apartments - Apartmani');
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1M6 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2" />
               </svg>
-              <span class="font-medium">Dates</span>
+              <span class="font-medium">
+                <?= htmlspecialchars(t('page.apartments.search_dates')) ?>
+              </span>
             </div>
-            <label for="dateRange" class="sr-only">Dates</label>
+            <label for="dateRange" class="sr-only">
+              <?= htmlspecialchars(t('page.apartments.search_dates')) ?>
+            </label>
             <!-- IMPORTANT: same id as on homepage so calendar.js picks it up -->
-            <input id="dateRange" class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm"
-              placeholder="From — To" />
+            <input
+              id="dateRange"
+              class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm"
+              placeholder="<?= htmlspecialchars(t('apt.dates_placeholder')) ?>"
+            />
           </div>
 
           <!-- Guests -->
@@ -45,22 +62,28 @@ site_head('Apartments - Apartmani');
                 <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
-              <span class="font-medium">Guests</span>
+              <span class="font-medium">
+                <?= htmlspecialchars(t('page.apartments.search_guests')) ?>
+              </span>
             </div>
-            <label for="guests" class="sr-only">Guests</label>
+            <label for="guests" class="sr-only">
+              <?= htmlspecialchars(t('page.apartments.search_guests')) ?>
+            </label>
             <!-- IMPORTANT: same id as on homepage so click handler keeps working -->
             <select id="guests" class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm" required
               aria-required="true">
-              <option value="" selected disabled hidden>Guests</option>
-              <option value="1">1 guest</option>
-              <option value="2">2 guests</option>
-              <option value="3">3 guests</option>
-              <option value="4">4 guests</option>
+              <option value="" selected disabled hidden>
+                <?= htmlspecialchars(t('page.apartments.guests_placeholder')) ?>
+              </option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
             </select>
           </div>
 
           <button id="searchBtn" class="w-full px-4 py-2 rounded-lg bg-mediterranean-blue text-white hover:opacity-90">
-            Search Availability
+            <?= htmlspecialchars(t('hero.search')) ?>
           </button>
         </div>
       </aside>
@@ -69,10 +92,16 @@ site_head('Apartments - Apartmani');
       <section class="space-y-6">
         <!-- Top toolbar (count + sort) -->
         <div class="flex items-center justify-between">
-          <p class="text-gray-600">Showing <?php echo count($apartments); ?> apartments</p>
+          <p class="text-gray-600">
+            <?= htmlspecialchars($countText) ?>
+          </p>
           <select class="rounded-md border border-mediterranean-sand bg-white px-3 py-2 text-sm">
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
+            <option>
+              <?= htmlspecialchars(t('page.apartments.sort_price_asc')) ?>
+            </option>
+            <option>
+              <?= htmlspecialchars(t('page.apartments.sort_price_desc')) ?>
+            </option>
           </select>
         </div>
 
@@ -82,9 +111,7 @@ site_head('Apartments - Apartmani');
             <div class="rounded-xl border border-mediterranean-sand overflow-hidden bg-white">
               <div class="grid md:grid-cols-[300px_1fr] gap-0">
                 <!-- Image -->
-
                 <?php
-                // ...unutar foreach ($apartments as $a)
                 $img = $a['images'][0] ?? null;
                 foreach (($a['images'] ?? []) as $im) {
                   if (!empty($im['featured']) || !empty($im['isFeatured'])) {
@@ -96,9 +123,14 @@ site_head('Apartments - Apartmani');
                 $imgAlt = $img['alt'] ?? ($a['name'] ?? 'Apartment');
                 ?>
                 <div class="relative aspect-[4/3] md:aspect-auto">
-                  <img src="<?php echo htmlspecialchars($imgUrl); ?>" alt="<?php echo htmlspecialchars($imgAlt); ?>"
-                    class="object-cover w-full h-full" loading="lazy" referrerpolicy="no-referrer"
-                    onerror="this.onerror=null;this.src='/assets/img/placeholder.jpg';" />
+                  <img
+                    src="<?php echo htmlspecialchars($imgUrl); ?>"
+                    alt="<?php echo htmlspecialchars($imgAlt); ?>"
+                    class="object-cover w-full h-full"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                    onerror="this.onerror=null;this.src='/assets/img/placeholder.jpg';"
+                  />
                   <?php if (!empty($a['images']) && count($a['images']) > 1): ?>
                     <div class="absolute bottom-2 right-2 bg-black/50 rounded-full px-2 py-1 text-xs text-white">
                       <span><?php echo count($a['images']); ?> photos</span>
@@ -113,8 +145,12 @@ site_head('Apartments - Apartmani');
                       <?php echo htmlspecialchars($a['name']); ?>
                     </h2>
                     <div class="flex items-baseline gap-1">
-                      <span class="font-semibold">€<?php echo htmlspecialchars($a['price']); ?></span>
-                      <span class="text-sm text-gray-500">/ night</span>
+                      <span class="font-semibold">
+                        €<?php echo htmlspecialchars($a['price']); ?>
+                      </span>
+                      <span class="text-sm text-gray-500">
+                        <?= htmlspecialchars(t('apt.per_night')) ?>
+                      </span>
                     </div>
                   </div>
 
@@ -126,17 +162,29 @@ site_head('Apartments - Apartmani');
                     <div class="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor">
-                        <path d="M2 12h20M2 12l4 8h12l4-8M6 12l2-6h8l2 6" />
+                        <path d="M4 21v-7a2 2 0 0 1 2-2h3v9" />
+                        <path d="M9 21V10" />
+                        <path d="M9 6.5A2.5 2.5 0 0 1 11.5 4H20a1 1 0 0 1 1 1v7H9" />
+                        <path d="M16 3v3" />
+                        <path d="M12 3v3" />
                       </svg>
-                      <?php echo (int) $a['beds']; ?> beds
+                      <?php echo (int) $a['baths']; ?>
+                      <?= htmlspecialchars(t('page.apartments.baths', ['count' => (int) $a['baths']])); ?>
                     </div>
                     <div class="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor">
-                        <path d="M3 10h18M6 10V6a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v4" />
-                        <path d="M6 10v7a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-7" />
+                        <path d="M3 7h18" />
+                        <path d="M3 11h18" />
+                        <path d="M5 4v3" />
+                        <path d="M19 4v3" />
+                        <path d="M6 11v9" />
+                        <path d="M18 11v9" />
+                        <path d="M10 11v9" />
+                        <path d="M14 11v9" />
                       </svg>
-                      <?php echo (int) $a['baths']; ?> bath
+                      <?php echo (int) $a['beds']; ?>
+                      <?= htmlspecialchars(t('page.apartments.beds', ['count' => (int) $a['beds']])); ?>
                     </div>
                     <div class="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
@@ -146,14 +194,16 @@ site_head('Apartments - Apartmani');
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                       </svg>
-                      <?php echo (int) $a['guests']; ?> guests
+                      <?= htmlspecialchars(t('page.apartments.guests', ['count' => (int) $a['guests']])); ?>
                     </div>
                   </div>
 
                   <div class="mt-2">
-                    <a href="<?php echo url('apartment.php?id=' . urlencode((string) $a['id'])); ?>"
-                      class="inline-flex items-center justify-center rounded-md bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm">
-                      View Details
+                    <a
+                      href="<?php echo url('apartment.php?id=' . urlencode((string) $a['id'])); ?>"
+                      class="inline-flex items-center justify-center rounded-md bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm"
+                    >
+                      <?= htmlspecialchars(t('page.apartments.view_details')) ?>
                     </a>
                   </div>
                 </div>

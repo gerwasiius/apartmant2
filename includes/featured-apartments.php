@@ -78,21 +78,21 @@ $apartments = [
 <section class="apart-section">
   <div class="apart-wrap">
     <div class="apart-container">
-      <h2 class="apart-title">Our Apartments</h2>
-      <p class="apart-sub">Choose from our selection of comfortable and well-equipped apartments</p>
+      <h2 class="apart-title"><?= htmlspecialchars(t('page.apartments.title')) ?></h2>
+      <p class="apart-sub"><?= htmlspecialchars(t('page.apartments.subtitle')) ?></p>
 
       <div class="apart-carousel mt-5" id="apartmentsCarousel">
-         <!-- Strelice su UNUTAR viewporta da budu iznad slika -->
-          <button class="apart-nav apart-prev" data-dir="prev" aria-label="Previous">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <button class="apart-nav apart-next" data-dir="next" aria-label="Next">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+        <!-- Strelice su UNUTAR viewporta da budu iznad slika -->
+        <button class="apart-nav apart-prev" data-dir="prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button class="apart-nav apart-next" data-dir="next" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
         <div class="apart-viewport" data-viewport>
           <div class="apart-track" data-track>
             <?php foreach ($apartments as $ap):
@@ -163,7 +163,7 @@ $apartments = [
             <?php endforeach; ?>
           </div>
 
-         
+
         </div>
 
         <div class="apart-dots" data-dots></div>
@@ -171,4 +171,3 @@ $apartments = [
     </div>
   </div>
 </section>
-

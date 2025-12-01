@@ -23,18 +23,19 @@
         alt="Majstorić Apartments Medulin - Apartment Interior" class="w-full h-full object-cover brightness-[0.7]">
     </div>
 
-<div id="heroDots" class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2 z-20 pointer-events-auto"></div>
+    <div id="heroDots" class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2 z-20 pointer-events-auto">
+    </div>
 
     <button id="heroPrev"
-  class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors z-20 pointer-events-auto hidden md:block"
-  aria-label="Previous image">
+      class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors z-20 pointer-events-auto hidden md:block"
+      aria-label="Previous image">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
     <button id="heroNext"
-  class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors z-20 pointer-events-auto hidden md:block"
-  aria-label="Next image">
+      class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors z-20 pointer-events-auto hidden md:block"
+      aria-label="Next image">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
@@ -61,13 +62,14 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M8 7V3m8 4V3M4 11h16M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1M6 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2" />
           </svg>
-          <span class="font-medium">Odaberite datum:</span>
+          <span class="font-medium"><?= htmlspecialchars(t('hero.select_dates')) ?></span>
         </div>
 
         <div class="grid grid-cols-1 gap-2">
           <!-- 1) Datumski raspon preko cijele širine -->
-          <label for="dateRange" class="sr-only">Datumi</label>
-          <input id="dateRange" class="input-sand w-full rounded-md px-3 py-2 text-sm" placeholder="Od — Do" />
+          <label for="dateRange" class="sr-only"><?= htmlspecialchars(t('apt.dates')) ?></label>
+          <input id="dateRange" class="input-sand w-full rounded-md px-3 py-2 text-sm"
+            placeholder="<?= htmlspecialchars(t('apt.dates_placeholder')) ?>" />
 
           <div class="flex items-center gap-2 mb-1">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-mediterranean-blue" viewBox="0 0 24 24"
@@ -78,11 +80,13 @@
               <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
               <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
-            <span class="font-medium">Odaberite broj gostiju:</span>
+            <span class="font-medium"><?= htmlspecialchars(t('hero.select_guests')) ?></span>
           </div>
-          <label for="guests" class="sr-only">Gosti</label>
+          <label for="guests" class="sr-only"><?= htmlspecialchars(t('page.apartments.search_guests')) ?></label>
           <select id="guests" class="input-sand rounded-md px-3 py-2 text-sm">
-            <option value="" selected disabled hidden>Broj gostiju</option>
+            <option value="" selected disabled hidden>
+              <?= htmlspecialchars(t('hero.guests_placeholder')) ?>
+            </option>
             <option value="1">1 gost</option>
             <option value="2">2 gosta</option>
             <option value="3">3 gosta</option>
@@ -92,7 +96,7 @@
           <!-- 3) Veliki gumb -->
           <button id="searchBtn"
             class="mt-1 w-full px-4 py-2 rounded-lg bg-mediterranean-blue text-white hover:opacity-90">
-            Pretraži dostupnost
+              <?= htmlspecialchars(t('hero.search')) ?>
           </button>
         </div>
       </div>
