@@ -67,8 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const guestsSel = document.getElementById("guests");
       const guests = (guestsSel && guestsSel.value) ? guestsSel.value : "";
 
-      // Extract YYYY-MM-DD ... YYYY-MM-DD even if alt input uses dash separators
-      const normalized = raw.replace(/\s*[\u2013-]\s*/g, " - ");
+      // Extract YYYY-MM-DD ... YYYY-MM-DD even if alt input uses various dash separators
+      const normalized = raw.replace(/\s*[\u2013\u2014-]\s*/g, " - ");
       const m = normalized.match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
       const from = m ? m[1] : "";
       const to   = m ? m[2] : "";

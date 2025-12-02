@@ -14,6 +14,9 @@ function site_head(string $title = 'Apartmani'): void
   $appName = t('app.name');
   $lang = current_lang();
 
+  $script = basename($_SERVER['SCRIPT_NAME'] ?? 'index.php');
+  $scriptUrl = ($base !== '' ? $base . '/' : '') . $script;
+
   echo <<<HTML
 <!doctype html>
 <html lang="{$langAttr}">
@@ -61,13 +64,13 @@ function site_head(string $title = 'Apartmani'): void
         </a>
 
          <div class="hidden md:flex items-center gap-2 text-xs">
-        <a href="{$base}{$_SERVER['PHP_SELF']}?lang=hr" class="underline-offset-2 hover:underline">HR</a>
+        <a href="{$scriptUrl}?lang=hr" class="underline-offset-2 hover:underline">HR</a>
         <span>|</span>
-        <a href="{$base}{$_SERVER['PHP_SELF']}?lang=en" class="underline-offset-2 hover:underline">EN</a>
+        <a href="{$scriptUrl}?lang=en" class="underline-offset-2 hover:underline">EN</a>
         <span>|</span>
-        <a href="{$base}{$_SERVER['PHP_SELF']}?lang=de" class="underline-offset-2 hover:underline">DE</a>
+        <a href="{$scriptUrl}?lang=de" class="underline-offset-2 hover:underline">DE</a>
         <span>|</span>
-        <a href="{$base}{$_SERVER['PHP_SELF']}?lang=fr" class="underline-offset-2 hover:underline">FR</a>
+        <a href="{$scriptUrl}?lang=fr" class="underline-offset-2 hover:underline">FR</a>
       </div>
       </nav>
 
