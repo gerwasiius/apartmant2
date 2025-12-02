@@ -6,20 +6,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const hrLocale = {
     weekdays: {
-      shorthand: ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"],
+      shorthand: ["Ned", "Pon", "Uto", "Sri", "Cet", "Pet", "Sub"],
       longhand: [
-        "Nedjelja","Ponedjeljak","Utorak","Srijeda","Četvrtak","Petak","Subota",
+        "Nedjelja","Ponedjeljak","Utorak","Srijeda","Cetvrtak","Petak","Subota",
       ],
     },
     months: {
-      shorthand: ["Sij", "Velj", "Ožu", "Tra", "Svi", "Lip", "Srp", "Kol", "Ruj", "Lis", "Stu", "Pro"],
+      shorthand: ["Sij", "Velj", "Ozu", "Tra", "Svi", "Lip", "Srp", "Kol", "Ruj", "Lis", "Stu", "Pro"],
       longhand: [
-        "Siječanj","Veljača","Ožujak","Travanj","Svibanj","Lipanj",
+        "Sijecanj","Veljaca","Ozujak","Travanj","Svibanj","Lipanj",
         "Srpanj","Kolovoz","Rujan","Listopad","Studeni","Prosinac",
       ],
     },
     firstDayOfWeek: 1,
-    rangeSeparator: " – ",
+    rangeSeparator: " - ",
     weekAbbreviation: "Tj.",
     scrollTitle: "Pomaknite za promjenu",
     toggleTitle: "Kliknite za prebacivanje",
@@ -40,33 +40,40 @@ document.addEventListener("DOMContentLoaded", function () {
     onClose: () => el.classList.remove("is-open"),
   });
 
-   const url = new URL(window.location.href);
+  const url = new URL(window.location.href);
   const from = url.searchParams.get("from");
   const to   = url.searchParams.get("to");
   const guestsSel = document.getElementById("guests");
   const guests = url.searchParams.get("guests");
+  const triggerChange = (el) => {
+    if (!el) return;
+    const evt = new Event("change", { bubbles: true });
+    el.dispatchEvent(evt);
+  };
 
   if (from && to) {
     try { fp.setDate([from, to], true); } catch(e) {}
+    triggerChange(el);
   }
   if (guestsSel && guests) {
     guestsSel.value = guests;
+    triggerChange(guestsSel);
   }
 
-const btn = document.getElementById("searchBtn");
+  const btn = document.getElementById("searchBtn");
   if (btn) {
     btn.addEventListener("click", () => {
       const raw = (document.getElementById("dateRange").value || "").trim();
       const guestsSel = document.getElementById("guests");
       const guests = (guestsSel && guestsSel.value) ? guestsSel.value : "";
 
-      // Izvuci YYYY-MM-DD ... YYYY-MM-DD iz raw vrijednosti (radi i za " – ")
-      const m = raw.replace('—','-').replace('–','-')
-                   .match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
+      // Extract YYYY-MM-DD ... YYYY-MM-DD even if alt input uses dash separators
+      const normalized = raw.replace(/\s*[\u2013-]\s*/g, " - ");
+      const m = normalized.match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
       const from = m ? m[1] : "";
       const to   = m ? m[2] : "";
 
-      // Odredi odredište (home i listing → apartments.php, detalj → apartment.php?id=..)
+      // Decide destination (home/listing -> apartments.php, detail -> apartment.php?id=..)
       const url = new URL(window.location.href);
       const id  = url.searchParams.get("id");
       let target = "apartments.php";
@@ -75,9 +82,9 @@ const btn = document.getElementById("searchBtn");
       }
 
       // Build dest using APP_BASE if provided (supports subfolder installs)
-      const base = (window.APP_BASE || '').replace(/\/$/, ''); // "" or "/apartmani-php"
-      const cleanedTarget = String(target).replace(/^\/+/, ''); // remove leading slashes
-      const finalPath = (base ? base + '/' : '/') + cleanedTarget;
+      const base = (window.APP_BASE || "").replace(/\/$/, ""); // "" or "/apartmani-php"
+      const cleanedTarget = String(target).replace(/^\/+/, ""); // remove leading slashes
+      const finalPath = (base ? base + "/" : "/") + cleanedTarget;
       const dest = new URL(finalPath, window.location.origin);
       if (from) dest.searchParams.set("from", from);
       if (to)   dest.searchParams.set("to", to);

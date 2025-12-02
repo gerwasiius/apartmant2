@@ -55,13 +55,30 @@
   const bookBtn = document.getElementById('bookBtn');
 
   function parseRange(val) {
-    // Tvoj calendar.js koristi altFormat i " – " (en-dash) kao separator u HR lokalizaciji. :contentReference[oaicite:10]{index=10}
-    // Ali input.value (bez altInput) je "YYYY-MM-DD to YYYY-MM-DD". Osigurajmo oba slučaja.
-    if (!val) return { from:null, to:null };
-    const raw = val.replace('—','-').replace('–','-');
-    const m = raw.match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
-    if (!m) return { from:null, to:null };
-    return { from: new Date(m[1] + 'T00:00:00'), to: new Date(m[2] + 'T00:00:00') };
+    // Try to read ISO values from the input; fallback to URL query params if parsing fails.
+    let from = null;
+    let to = null;
+
+    if (val) {
+      const normalized = val.replace(/\s*[\u2013-]\s*/g, ' - ');
+      const m = normalized.match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
+      if (m) {
+        from = new Date(m[1] + 'T00:00:00');
+        to = new Date(m[2] + 'T00:00:00');
+      }
+    }
+
+    if (!from || !to) {
+      const url = new URL(window.location.href);
+      const fromQ = url.searchParams.get('from');
+      const toQ = url.searchParams.get('to');
+      if (fromQ && toQ) {
+        from = new Date(fromQ + 'T00:00:00');
+        to = new Date(toQ + 'T00:00:00');
+      }
+    }
+
+    return { from, to };
   }
 
   function diffNights(a,b){ const MS=86400000; return Math.max(0, Math.round((b-a)/MS)); }

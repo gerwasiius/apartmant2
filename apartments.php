@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/config/bootstrap.php';
 $apartments = load_apartments();
+$fromParam = $_GET['from'] ?? '';
+$toParam = $_GET['to'] ?? '';
+$guestsParam = $_GET['guests'] ?? '';
 
 $count = count($apartments);
 $countText = t('page.apartments.showing', ['count' => $count]);
@@ -199,8 +202,15 @@ site_head(t('page.apartments.title') . ' - Apartmani');
                   </div>
 
                   <div class="mt-2">
+                    <?php
+                    $detailParams = ['id' => $a['id']];
+                    if ($fromParam)   $detailParams['from'] = $fromParam;
+                    if ($toParam)     $detailParams['to'] = $toParam;
+                    if ($guestsParam) $detailParams['guests'] = $guestsParam;
+                    $detailHref = url('apartment.php?' . http_build_query($detailParams));
+                    ?>
                     <a
-                      href="<?php echo url('apartment.php?id=' . urlencode((string) $a['id'])); ?>"
+                      href="<?php echo htmlspecialchars($detailHref); ?>"
                       class="inline-flex items-center justify-center rounded-md bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm"
                     >
                       <?= htmlspecialchars(t('page.apartments.view_details')) ?>

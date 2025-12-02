@@ -156,7 +156,11 @@ $apartments = [
                   </div>
                   <div class="apart-foot">
                     <div class="apart-price">€<?= (int) $ap['price']; ?> <small>/ night</small></div>
-                    <a class="apart-btn" href="/apartments/<?= (int) $ap['id']; ?>">View Details</a>
+                    <a
+                      class="apart-btn"
+                      href="<?= htmlspecialchars(url('apartment.php?id=' . (int) $ap['id'])); ?>">
+                      <?= htmlspecialchars(t('page.apartments.view_details')); ?>
+                    </a>
                   </div>
                 </article>
               </div>
