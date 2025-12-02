@@ -15,7 +15,7 @@ if (!$apt) {
   exit;
 }
 
-site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
+site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
 ?>
 
 <main class="min-h-[60vh] bg-[#FAF7EE]">
@@ -26,7 +26,7 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
     </a>
 
     <h1 class="mt-2 text-3xl md:text-4xl font-semibold text-mediterranean-blue-dark">
-      <?php echo htmlspecialchars($apt['name']); ?>
+      <?php echo htmlspecialchars($apt['name'] ?? ''); ?>
     </h1>
 
     <p class="mt-1 text-gray-600">
@@ -71,7 +71,7 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
               <img
                 id="hero"
                 src="<?php echo htmlspecialchars($featured['url']); ?>"
-                alt="<?php echo htmlspecialchars($featured['alt'] ?? $apt['name']); ?>"
+                alt="<?php echo htmlspecialchars($featured['alt'] ?? ($apt['name'] ?? '')); ?>"
                 class="w-full h-[260px] md:h-[360px] lg:h-[420px] object-cover rounded-lg"
               />
               <?php $total = count($images); ?>
@@ -79,24 +79,23 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
                 <div
                   class="absolute bottom-3 left-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full flex items-center gap-2">
                   <span id="imgCounter">1/<?php echo $total; ?></span>
-                  <span class="hidden sm:inline">Photos</span>
                 </div>
               <?php endif; ?>
             </div>
 
             <?php if ($total > 1): ?>
-              <div
-                id="thumbs"
-                class="mt-3 grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 max-h-[120px] overflow-y-auto pr-1">
+              <div id="thumbs"
+                   class="mt-3 grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 max-h-[120px] overflow-y-auto pr-1">
                 <?php foreach ($images as $idx => $im): ?>
                   <button
                     type="button"
-                    data-index="<?php echo $idx; ?>"
-                    class="border border-transparent rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-mediterranean-blue focus:ring-offset-1 focus:ring-offset-white">
+                    data-index="<?php echo (int) $idx; ?>"
+                    class="relative rounded-md overflow-hidden border border-transparent hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-mediterranean-blue focus:ring-offset-1">
                     <img
                       src="<?php echo htmlspecialchars($im['url']); ?>"
-                      alt="<?php echo htmlspecialchars($im['alt'] ?? $apt['name']); ?>"
-                      class="w-full h-16 object-cover"
+                      alt="<?php echo htmlspecialchars($im['alt'] ?? ($apt['name'] ?? '')); ?>"
+                      class="w-full h-[70px] object-cover"
+                      loading="lazy"
                     />
                   </button>
                 <?php endforeach; ?>
@@ -128,7 +127,7 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
               type="button"
               class="tab-btn pb-3 border-b-2 border-transparent text-gray-700"
               data-tab="rules">
-              <?= htmlspecialchars(t('apt.rules')) ?>
+              <?= htmlspecialchars(t('apt.house_rules')) ?>
             </button>
           </div>
         </div>
@@ -151,10 +150,10 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
               <div class="mt-4 flex items-center gap-2 text-sm text-gray-700">
                 <?php if (!empty($apt['rating'])): ?>
                   <span class="inline-flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500" viewBox="0 0 24 24"
-                         fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 24 24"
+                         fill="currentColor" aria-hidden="true">
                       <path
-                        d="M12 .587l3.668 7.431 8.207 1.193-5.938 5.788 1.403 8.182L12 18.896l-7.34 3.855 1.403-8.182L.125 9.211l8.207-1.193z" />
+                        d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.788 1.402 8.17L12 18.897l-7.336 3.871 1.402-8.17L.132 9.21l8.2-1.192z" />
                     </svg>
                     <span><?php echo htmlspecialchars(number_format((float) $apt['rating'], 1)); ?></span>
                   </span>
@@ -172,10 +171,10 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
           <article id="panel-amen" class="hidden">
             <?php if (!empty($apt['amenities']) && is_array($apt['amenities'])): ?>
               <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-700 text-sm">
-                <?php foreach ($apt['amenities'] as $am): ?>
+                <?php foreach ($apt['amenities'] as $amen): ?>
                   <li class="flex items-center gap-2">
                     <span class="inline-block w-1.5 h-1.5 rounded-full bg-mediterranean-blue"></span>
-                    <span><?php echo htmlspecialchars($am); ?></span>
+                    <span><?php echo htmlspecialchars($amen); ?></span>
                   </li>
                 <?php endforeach; ?>
               </ul>
@@ -205,7 +204,7 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
           <div class="flex items-baseline justify-between gap-3">
             <div class="flex items-baseline gap-1">
               <span class="text-2xl font-semibold text-mediterranean-blue-dark">
-                €<span id="priceTop"><?php echo (int) $apt['price']; ?></span>
+                €<span id="priceTop"><?php echo (int) ($apt['price'] ?? 0); ?></span>
               </span>
               <span class="text-gray-600 text-sm">
                 <?= htmlspecialchars(t('apt.per_night')) ?>
@@ -213,10 +212,10 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
             </div>
             <?php if (!empty($apt['rating'])): ?>
               <div class="flex items-center gap-1 text-sm text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500" viewBox="0 0 24 24"
-                     fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
                   <path
-                    d="M12 .587l3.668 7.431 8.207 1.193-5.938 5.788 1.403 8.182L12 18.896l-7.34 3.855 1.403-8.182L.125 9.211l8.207-1.193z" />
+                    d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.788 1.402 8.17L12 18.897l-7.336 3.871 1.402-8.17L.132 9.211l8.207-1.193z" />
                 </svg>
                 <span><?php echo htmlspecialchars(number_format((float) $apt['rating'], 1)); ?></span>
                 <?php if (!empty($apt['reviews'])): ?>
@@ -226,7 +225,6 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
             <?php endif; ?>
           </div>
 
-          <!-- Form -->
           <form class="mt-4 space-y-4" method="post" action="#">
             <!-- Dates -->
             <div class="flex flex-col gap-1">
@@ -295,7 +293,7 @@ site_head(htmlspecialchars($apt['name']) . ' - ' . t('app.name'));
             <div class="border-t border-mediterranean-sand pt-3 space-y-2 text-sm text-gray-700">
               <div class="flex justify-between">
                 <p class="text-sm text-gray-600">
-                  €<?php echo (int) $apt['price']; ?> ×
+                  €<?php echo (int) ($apt['price'] ?? 0); ?> ×
                   <span id="nights">0</span>
                   <?= htmlspecialchars(t('apt.night')) ?>
                 </p>

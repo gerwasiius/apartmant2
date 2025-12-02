@@ -111,20 +111,21 @@ site_head(t('page.apartments.title') . ' - Apartmani');
         <!-- Apartments list (card rows like v0) -->
         <div class="space-y-6">
           <?php foreach ($apartments as $a): ?>
+            <?php
+              $images = $a['images'] ?? [];
+              $img = $images[0] ?? null;
+              foreach ($images as $im) {
+                if (!empty($im['featured']) || !empty($im['isFeatured'])) {
+                  $img = $im;
+                  break;
+                }
+              }
+              $imgUrl = $img['url'] ?? '';
+              $imgAlt = $img['alt'] ?? ($a['name'] ?? 'Apartment');
+            ?>
             <div class="rounded-xl border border-mediterranean-sand overflow-hidden bg-white">
               <div class="grid md:grid-cols-[300px_1fr] gap-0">
                 <!-- Image -->
-                <?php
-                $img = $a['images'][0] ?? null;
-                foreach (($a['images'] ?? []) as $im) {
-                  if (!empty($im['featured']) || !empty($im['isFeatured'])) {
-                    $img = $im;
-                    break;
-                  }
-                }
-                $imgUrl = $img['url'] ?? '';
-                $imgAlt = $img['alt'] ?? ($a['name'] ?? 'Apartment');
-                ?>
                 <div class="relative aspect-[4/3] md:aspect-auto">
                   <img
                     src="<?php echo htmlspecialchars($imgUrl); ?>"
@@ -134,9 +135,9 @@ site_head(t('page.apartments.title') . ' - Apartmani');
                     referrerpolicy="no-referrer"
                     onerror="this.onerror=null;this.src='/assets/img/placeholder.jpg';"
                   />
-                  <?php if (!empty($a['images']) && count($a['images']) > 1): ?>
+                  <?php if (!empty($images) && count($images) > 1): ?>
                     <div class="absolute bottom-2 right-2 bg-black/50 rounded-full px-2 py-1 text-xs text-white">
-                      <span><?php echo count($a['images']); ?> photos</span>
+                      <span><?php echo count($images); ?> photos</span>
                     </div>
                   <?php endif; ?>
                 </div>
@@ -145,11 +146,11 @@ site_head(t('page.apartments.title') . ' - Apartmani');
                 <div class="p-6 flex flex-col gap-3">
                   <div class="flex items-start justify-between">
                     <h2 class="text-xl font-semibold text-mediterranean-blue-dark">
-                      <?php echo htmlspecialchars($a['name']); ?>
+                      <?php echo htmlspecialchars($a['name'] ?? ''); ?>
                     </h2>
                     <div class="flex items-baseline gap-1">
                       <span class="font-semibold">
-                        €<?php echo htmlspecialchars($a['price']); ?>
+                        €<?php echo htmlspecialchars((string)($a['price'] ?? '')); ?>
                       </span>
                       <span class="text-sm text-gray-500">
                         <?= htmlspecialchars(t('apt.per_night')) ?>
@@ -158,7 +159,7 @@ site_head(t('page.apartments.title') . ' - Apartmani');
                   </div>
 
                   <p class="text-gray-600">
-                    <?php echo htmlspecialchars($a['description']); ?>
+                    <?php echo htmlspecialchars($a['description'] ?? ''); ?>
                   </p>
 
                   <div class="flex items-center gap-4 text-sm text-gray-800">
@@ -171,23 +172,18 @@ site_head(t('page.apartments.title') . ' - Apartmani');
                         <path d="M16 3v3" />
                         <path d="M12 3v3" />
                       </svg>
-                      <?php echo (int) $a['baths']; ?>
-                      <?= htmlspecialchars(t('page.apartments.baths', ['count' => (int) $a['baths']])); ?>
+                      <?= htmlspecialchars(
+                        t('page.apartments.beds', ['count' => (int)($a['beds'] ?? 0)])
+                      ); ?>
                     </div>
                     <div class="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor">
-                        <path d="M3 7h18" />
-                        <path d="M3 11h18" />
-                        <path d="M5 4v3" />
-                        <path d="M19 4v3" />
-                        <path d="M6 11v9" />
-                        <path d="M18 11v9" />
-                        <path d="M10 11v9" />
-                        <path d="M14 11v9" />
+                        <path d="M4 12V7a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v5M4 21v-3m16 3v-3M4 15h16v3H4z" />
                       </svg>
-                      <?php echo (int) $a['beds']; ?>
-                      <?= htmlspecialchars(t('page.apartments.beds', ['count' => (int) $a['beds']])); ?>
+                      <?= htmlspecialchars(
+                        t('page.apartments.baths', ['count' => (int)($a['baths'] ?? 0)])
+                      ); ?>
                     </div>
                     <div class="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
@@ -197,7 +193,9 @@ site_head(t('page.apartments.title') . ' - Apartmani');
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                       </svg>
-                      <?= htmlspecialchars(t('page.apartments.guests', ['count' => (int) $a['guests']])); ?>
+                      <?= htmlspecialchars(
+                        t('page.apartments.guests', ['count' => (int)($a['guests'] ?? 0)])
+                      ); ?>
                     </div>
                   </div>
 
