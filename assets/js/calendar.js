@@ -8,14 +8,43 @@ document.addEventListener("DOMContentLoaded", function () {
     weekdays: {
       shorthand: ["Ned", "Pon", "Uto", "Sri", "Cet", "Pet", "Sub"],
       longhand: [
-        "Nedjelja","Ponedjeljak","Utorak","Srijeda","Cetvrtak","Petak","Subota",
+        "Nedjelja",
+        "Ponedjeljak",
+        "Utorak",
+        "Srijeda",
+        "Cetvrtak",
+        "Petak",
+        "Subota",
       ],
     },
     months: {
-      shorthand: ["Sij", "Velj", "Ozu", "Tra", "Svi", "Lip", "Srp", "Kol", "Ruj", "Lis", "Stu", "Pro"],
+      shorthand: [
+        "Sij",
+        "Velj",
+        "Ozu",
+        "Tra",
+        "Svi",
+        "Lip",
+        "Srp",
+        "Kol",
+        "Ruj",
+        "Lis",
+        "Stu",
+        "Pro",
+      ],
       longhand: [
-        "Sijecanj","Veljaca","Ozujak","Travanj","Svibanj","Lipanj",
-        "Srpanj","Kolovoz","Rujan","Listopad","Studeni","Prosinac",
+        "Sijecanj",
+        "Veljaca",
+        "Ozujak",
+        "Travanj",
+        "Svibanj",
+        "Lipanj",
+        "Srpanj",
+        "Kolovoz",
+        "Rujan",
+        "Listopad",
+        "Studeni",
+        "Prosinac",
       ],
     },
     firstDayOfWeek: 1,
@@ -42,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const url = new URL(window.location.href);
   const from = url.searchParams.get("from");
-  const to   = url.searchParams.get("to");
+  const to = url.searchParams.get("to");
   const guestsSel = document.getElementById("guests");
   const guests = url.searchParams.get("guests");
   const triggerChange = (el) => {
@@ -51,46 +80,74 @@ document.addEventListener("DOMContentLoaded", function () {
     el.dispatchEvent(evt);
   };
 
-  if (from && to) {
-    try { fp.setDate([from, to], true); } catch(e) {}
-    triggerChange(el);
+   if (from && to) {
+    // sigurno parsiranje u Date objekte
+    const fromDate = fp.parseDate(from, "Y-m-d");
+    const toDate   = fp.parseDate(to,   "Y-m-d");
+
+    if (fromDate && toDate) {
+      fp.setDate([fromDate, toDate], false);  // false = ne diraj input ručno
+
+      // ručno upiši range u alt input (ono što ti vidiš)
+      if (fp.altInput) {
+        const fmt = d => fp.formatDate(d, "d. M Y");
+        fp.altInput.value = `${fmt(fromDate)} - ${fmt(toDate)}`;
+      }
+      triggerChange(el);
+    }
   }
+
   if (guestsSel && guests) {
     guestsSel.value = guests;
     triggerChange(guestsSel);
   }
 
   const btn = document.getElementById("searchBtn");
-  if (btn) {
-    btn.addEventListener("click", () => {
-      const raw = (document.getElementById("dateRange").value || "").trim();
-      const guestsSel = document.getElementById("guests");
-      const guests = (guestsSel && guestsSel.value) ? guestsSel.value : "";
 
-      // Extract YYYY-MM-DD ... YYYY-MM-DD even if alt input uses various dash separators
-      const normalized = raw.replace(/\s*[\u2013\u2014-]\s*/g, " - ");
-      const m = normalized.match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
-      const from = m ? m[1] : "";
-      const to   = m ? m[2] : "";
-
-      // Decide destination (home/listing -> apartments.php, detail -> apartment.php?id=..)
-      const url = new URL(window.location.href);
-      const id  = url.searchParams.get("id");
-      let target = "apartments.php";
-      if (url.pathname.includes("apartment.php") && id) {
-        target = `apartment.php?id=${encodeURIComponent(id)}`;
-      }
-
-      // Build dest using APP_BASE if provided (supports subfolder installs)
-      const base = (window.APP_BASE || "").replace(/\/$/, ""); // "" or "/apartmani-php"
-      const cleanedTarget = String(target).replace(/^\/+/, ""); // remove leading slashes
-      const finalPath = (base ? base + "/" : "/") + cleanedTarget;
-      const dest = new URL(finalPath, window.location.origin);
-      if (from) dest.searchParams.set("from", from);
-      if (to)   dest.searchParams.set("to", to);
-      if (guests) dest.searchParams.set("guests", guests);
-
-      window.location.href = dest.toString();
-    });
+  if (!btn) {
+    return;
   }
+
+
+  btn.addEventListener("click", () => {
+    const input = document.getElementById("dateRange");
+    const guestsSel = document.getElementById("guests");
+
+    let from = "";
+    let to = "";
+
+    if (input && input._flatpickr) {
+      const fp = input._flatpickr;
+
+      const dates = fp.selectedDates || [];
+      if (dates.length > 0) {
+        const toIso = (d) => d.toISOString().slice(0, 10); // YYYY-MM-DD
+        from = toIso(dates[0]);
+        if (dates[1]) {
+          to = toIso(dates[1]);
+        }
+      }
+    }
+
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("id");
+
+    let target = "apartments.php";
+    if (url.pathname.includes("apartment.php") && id) {
+      target = `apartment.php?id=${encodeURIComponent(id)}`;
+    }
+
+    const base = (window.APP_BASE || "").replace(/\/$/, "");
+    const cleanedTarget = String(target).replace(/^\/+/, "");
+    const finalPath = (base ? base + "/" : "/") + cleanedTarget;
+    const dest = new URL(finalPath, window.location.origin);
+
+    dest.searchParams.set("from", from);
+    if (to) dest.searchParams.set("to", to);
+    if (guestsSel && guestsSel.value) {
+      dest.searchParams.set("guests", guestsSel.value);
+    }
+
+    window.location.href = dest.toString();
+  });
 });
