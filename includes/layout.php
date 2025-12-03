@@ -14,8 +14,40 @@ function site_head(string $title = 'Apartmani'): void
   $appName = t('app.name');
   $lang = current_lang();
 
+  // trenutni script (fallback)
   $script = basename($_SERVER['SCRIPT_NAME'] ?? 'index.php');
   $scriptUrl = ($base !== '' ? $base . '/' : '') . $script;
+
+  // --- FIX: jezici zadržavaju postojeće query parametre (id, from, to, guests, ...) ---
+  $reqUri = $_SERVER['REQUEST_URI'] ?? $scriptUrl;
+  $parsed = parse_url($reqUri);
+
+  $path = $parsed['path'] ?? $scriptUrl;
+  $queryParams = [];
+  if (!empty($parsed['query'])) {
+      parse_str($parsed['query'], $queryParams);
+  }
+  unset($queryParams['lang']); // uvijek izbaci stari 'lang'
+
+  $makeLangUrl = function (string $code) use ($path, $queryParams, $base): string {
+      $params = $queryParams;
+      $params['lang'] = $code;
+      $qs = http_build_query($params);
+
+      $fullPath = $path;
+      // ako je app u podfolderu, pobrini se da path ima APP_BASE prefiks
+      if ($base !== '' && strpos($fullPath, $base . '/') !== 0) {
+          $fullPath = $base . $fullPath;
+      }
+
+      return $fullPath . ($qs ? '?' . $qs : '');
+  };
+
+  $hrefLangHr = htmlspecialchars($makeLangUrl('hr'), ENT_QUOTES);
+  $hrefLangEn = htmlspecialchars($makeLangUrl('en'), ENT_QUOTES);
+  $hrefLangDe = htmlspecialchars($makeLangUrl('de'), ENT_QUOTES);
+  $hrefLangFr = htmlspecialchars($makeLangUrl('fr'), ENT_QUOTES);
+  // --- kraj fixa ---
 
   echo <<<HTML
 <!doctype html>
@@ -30,8 +62,8 @@ function site_head(string $title = 'Apartmani'): void
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <link rel="stylesheet" href="{$base}/assets/css/style.css">
   <link rel="stylesheet" href="{$base}/assets/css/cta.css">
-<link rel="stylesheet" href="{$base}/assets/css/location.css">
-<script>window.APP_BASE = "{$base}";</script>
+  <link rel="stylesheet" href="{$base}/assets/css/location.css">
+  <script>window.APP_BASE = "{$base}";</script>
 </head>
 <body class="bg-mediterranean-beige text-gray-900">
   <header class="sticky top-0 z-40 w-full border-b border-mediterranean-sand header-glass">
@@ -63,15 +95,15 @@ function site_head(string $title = 'Apartmani'): void
           {$navBookNow}
         </a>
 
-         <div class="hidden md:flex items-center gap-2 text-xs">
-        <a href="{$scriptUrl}?lang=hr" class="underline-offset-2 hover:underline">HR</a>
-        <span>|</span>
-        <a href="{$scriptUrl}?lang=en" class="underline-offset-2 hover:underline">EN</a>
-        <span>|</span>
-        <a href="{$scriptUrl}?lang=de" class="underline-offset-2 hover:underline">DE</a>
-        <span>|</span>
-        <a href="{$scriptUrl}?lang=fr" class="underline-offset-2 hover:underline">FR</a>
-      </div>
+        <div class="hidden md:flex items-center gap-2 text-xs">
+          <a href="{$hrefLangHr}" class="underline-offset-2 hover:underline">HR</a>
+          <span>|</span>
+          <a href="{$hrefLangEn}" class="underline-offset-2 hover:underline">EN</a>
+          <span>|</span>
+          <a href="{$hrefLangDe}" class="underline-offset-2 hover:underline">DE</a>
+          <span>|</span>
+          <a href="{$hrefLangFr}" class="underline-offset-2 hover:underline">FR</a>
+        </div>
       </nav>
 
       <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-md p-2 hover:bg-black/5" aria-label="Open menu">
@@ -177,4 +209,3 @@ function site_footer(): void
 </html>
 HTML;
 }
-
