@@ -87,10 +87,10 @@
             <option value="" selected disabled hidden>
               <?= htmlspecialchars(t('hero.guests_placeholder')) ?>
             </option>
-            <option value="1">1 gost</option>
-            <option value="2">2 gosta</option>
-            <option value="3">3 gosta</option>
-            <option value="4">4 gosta</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
           </select>
 
           <!-- 3) Veliki gumb -->
