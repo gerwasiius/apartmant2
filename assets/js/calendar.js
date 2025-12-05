@@ -221,16 +221,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const currentLocale = locales[pageLang] || hrLocale;
   el.value = "";
+
+  // Prilagodi broj mjeseci prema veličini ekrana
+  const getShowMonths = () => window.innerWidth > 768 ? 2 : 1;
+
   const fp = flatpickr(el, {
     mode: "range",
     dateFormat: "Y-m-d",
     altInput: true,
     altFormat: "d. M Y",
-    showMonths: 2,
+    showMonths: getShowMonths(),
     minDate: "today",
     disableMobile: true,
     locale: currentLocale,
-    onOpen: () => el.classList.add("is-open"),
+    onOpen: () => {
+      el.classList.add("is-open");
+      // Ako se veličina ekrana promijenila nakon što je kalendar otvoren
+      const newMonths = getShowMonths();
+      if (fp.config.showMonths !== newMonths) {
+        fp.set("showMonths", newMonths);
+      }
+    },
     onClose: () => el.classList.remove("is-open"),
 
     // NOVO: svaki put kad korisnik promijeni datume -> pošalji change event
@@ -238,6 +249,19 @@ document.addEventListener("DOMContentLoaded", function () {
       const evt = new Event("change", { bubbles: true });
       el.dispatchEvent(evt);
     },
+  });
+
+  // Prilagodi kalendar ako se prozor skalira
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    if (!fp.isOpen) return;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const newMonths = getShowMonths();
+      if (fp.config.showMonths !== newMonths) {
+        fp.set("showMonths", newMonths);
+      }
+    }, 250);
   });
 
   const url = new URL(window.location.href);

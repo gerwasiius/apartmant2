@@ -368,3 +368,109 @@ footer.border-t { padding-top: 12px; }
 #dateRange:focus{outline:2px solid var(--mediterranean-blue);outline-offset:1px}
 /* (optional) unify placeholder color */
 #dateRange::placeholder{color:#6b7280}
+
+/* Responsive calendar improvements for mobile */
+@media (max-width: 768px) {
+  #dateRange,
+  #guests {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .flatpickr-day {
+    padding: 6px 2px;
+    min-height: 36px;
+  }
+}
+
+
+@media (max-width: 640px) {
+  .ap-sidebar #dateRange,
+  .ap-sidebar #guests {
+    height: 48px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid var(--mediterranean-sand);
+  }
+  
+  /* Add touch feedback */
+  .ap-sidebar #dateRange:active,
+  .ap-sidebar #guests:active {
+    background-color: rgba(58, 124, 165, 0.05);
+  }
+  
+  /* Enable touch scrolling on calendar */
+  .flatpickr-calendar {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Better button touch targets */
+  button {
+    touch-action: manipulation;
+  }
+}
+
+/* Responsive sidebar on mobile */
+@media (max-width: 640px) {
+  .ap-sidebar {
+    position: static;
+    top: auto;
+    height: auto;
+  }
+
+  .ap-sidebar-inner {
+    padding: 12px;
+  }
+
+  .ap-sidebar-inner .flex {
+    flex-wrap: wrap;
+  }
+  
+  /* Form fields spacing */
+  .ap-sidebar form > div {
+    margin-bottom: 1rem;
+  }
+  
+  /* Improve booking button on mobile */
+  #bookBtn {
+    height: 48px;
+    font-size: 16px;
+    padding: 0 16px;
+  }
+  
+  /* Improve label visibility on mobile */
+  .ap-sidebar form label + input,
+  .ap-sidebar form label + select {
+    margin-top: 4px;
+  }
+  
+  /* Adjust flex container for mobile labels */
+  .ap-sidebar-inner .flex.items-baseline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .ap-sidebar-inner .flex.items-baseline .flex {
+    width: 100%;
+  }
+}
+
+/* Extra small devices (less than 380px) */
+@media (max-width: 380px) {
+  .flatpickr-calendar {
+    font-size: 13px;
+  }
+  
+  .flatpickr-day {
+    font-size: 12px;
+  }
+  
+  .flatpickr-prev,
+  .flatpickr-next {
+    width: 28px;
+    height: 28px;
+  }
+}

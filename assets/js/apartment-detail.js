@@ -105,8 +105,7 @@
       currency: "EUR",
     });
 
-    const CLEANING_FEE = 50;
-    const SERVICE_RATE = 0.1; // 10%
+    // Naknade su uključene u cijenu apartmana — ukloniti dodatne troškove
 
     function diffNights(a, b) {
       const MS = 86400000;
@@ -150,8 +149,7 @@
       nightsEl.textContent = String(nights);
 
       const room = PRICE * nights;
-      const service = Math.round(room * SERVICE_RATE);
-      const total = nights > 0 ? room + CLEANING_FEE + service : 0;
+      const total = nights > 0 ? room : 0;
 
       subtotalEl.textContent = fmt.format(room);
       totalEl.textContent = fmt.format(total);
