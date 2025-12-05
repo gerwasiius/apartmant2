@@ -1,64 +1,73 @@
-<!-- Kontakt forma -->
-<form action="#" method="post" class="space-y-4">
-  <div class="space-y-1">
-    <label for="name" class="block text-sm font-medium text-gray-700">
-      <?= htmlspecialchars(t('page.contact.form_name_label')) ?>
-    </label>
-    <input
-      type="text"
-      id="name"
-      name="name"
-      required
-      class="w-full rounded-md border border-mediterranean-sand px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mediterranean-blue focus:border-mediterranean-blue bg-white"
-      placeholder="<?= htmlspecialchars(t('page.contact.form_name_placeholder')) ?>"
-    />
+<?php
+// 1) Podesive vrijednosti (po želji povuci iz baze)
+$googleMapsEmbedSrc = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2813.2775429669397!2d13.95072491554301!3d44.82252397909862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47632bc5b0e7e9c3%3A0x3ae35a8456593302!2sFucane%20122A%2C%2052100%2C%20Medulin%2C%20Croatia!5e0!3m2!1sen!2sus!4v1651234567890!5m2!1sen!2sus';
+
+$attractions = [
+  [
+    'name'     => t('location.attractions.medulin.name'),
+    'distance' => t('location.attractions.medulin.distance'),
+    'desc'     => t('location.attractions.medulin.desc'),
+  ],
+  [
+    'name'     => t('location.attractions.kamenjak.name'),
+    'distance' => t('location.attractions.kamenjak.distance'),
+    'desc'     => t('location.attractions.kamenjak.desc'),
+  ],
+  [
+    'name'     => t('location.attractions.arena.name'),
+    'distance' => t('location.attractions.arena.distance'),
+    'desc'     => t('location.attractions.arena.desc'),
+  ],
+  [
+    'name'     => t('location.attractions.restaurants.name'),
+    'distance' => t('location.attractions.restaurants.distance'),
+    'desc'     => t('location.attractions.restaurants.desc'),
+  ],
+];
+?>
+<section class="loc container">
+  <div class="loc-grid">
+    <!-- Lijeva kolona: lista -->
+    <div class="loc-left">
+      <div class="loc-title-wrap">
+        <h2 class="loc-title"><?= htmlspecialchars(t('location.title')) ?></h2>
+        <p class="loc-sub"><?= htmlspecialchars(t('location.subtitle')) ?></p>
+      </div>
+
+      <div class="loc-list">
+        <?php foreach ($attractions as $item): ?>
+          <div class="loc-item">
+            <span class="loc-pin" aria-hidden="true">
+              <!-- mali inline SVG pin (bez vanjskih ikona) -->
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path
+                  d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+              </svg>
+            </span>
+            <div class="loc-item-body">
+              <div class="loc-item-line">
+                <h3 class="loc-item-title"><?= htmlspecialchars($item['name']) ?></h3>
+                <span class="loc-item-distance">(<?= htmlspecialchars($item['distance']) ?>)</span>
+              </div>
+              <p class="loc-item-desc"><?= htmlspecialchars($item['desc']) ?></p>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <!-- Desna kolona: Google mapa -->
+    <div class="loc-map-wrap">
+      <iframe src="<?= htmlspecialchars($googleMapsEmbedSrc) ?>" loading="lazy" allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade" title="Majstorić Apartments Location" class="loc-map-iframe">
+      </iframe>
+
+      <!-- Overlay s gradijentom i tekstom preko mape -->
+    </div>
   </div>
 
-  <div class="space-y-1">
-    <label for="email" class="block text-sm font-medium text-gray-700">
-      <?= htmlspecialchars(t('page.contact.form_email_label')) ?>
-    </label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      required
-      class="w-full rounded-md border border-mediterranean-sand px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mediterranean-blue focus:border-mediterranean-blue bg-white"
-      placeholder="<?= htmlspecialchars(t('page.contact.form_email_placeholder')) ?>"
-    />
+  <!-- ukrasna “crtica” kao u v0 -->
+  <div class="loc-divider">
+    <div class="loc-divider-line"></div>
   </div>
-
-  <div class="space-y-1">
-    <label for="phone" class="block text-sm font-medium text-gray-700">
-      <?= htmlspecialchars(t('page.contact.form_phone_label')) ?>
-    </label>
-    <input
-      type="tel"
-      id="phone"
-      name="phone"
-      class="w-full rounded-md border border-mediterranean-sand px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mediterranean-blue focus:border-mediterranean-blue bg-white"
-      placeholder="<?= htmlspecialchars(t('page.contact.form_phone_placeholder')) ?>"
-    />
-  </div>
-
-  <div class="space-y-1">
-    <label for="message" class="block text-sm font-medium text-gray-700">
-      <?= htmlspecialchars(t('page.contact.form_message_label')) ?>
-    </label>
-    <textarea
-      id="message"
-      name="message"
-      rows="4"
-      required
-      class="w-full rounded-md border border-mediterranean-sand px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mediterranean-blue focus:border-mediterranean-blue bg-white"
-      placeholder="<?= htmlspecialchars(t('page.contact.form_message_placeholder')) ?>"
-    ></textarea>
-  </div>
-
-  <button
-    type="submit"
-    class="w-full h-11 inline-flex items-center justify-center rounded-md bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white text-sm font-medium transition-colors"
-  >
-    <?= htmlspecialchars(t('page.contact.form_submit')) ?>
-  </button>
-</form>
+</section>

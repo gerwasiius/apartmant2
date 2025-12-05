@@ -26,6 +26,21 @@
         "isFeatured": false,
         "order": 2
       }
+    ],
+    "amenities": [
+      "Air conditioning",
+      "Garden",
+      "TV",
+      "Parking",
+      "Free WiFi",
+      "Coffee maker",
+      "Safe"
+    ],
+    "rules": [
+      "No smoking",
+      "No parties",
+      "Check-in: 3:00 PM",
+      "Checkout: 10:00 AM"
     ]
   },
   {

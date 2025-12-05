@@ -4,7 +4,7 @@ require_once __DIR__ . '/config/bootstrap.php';
 require_once __DIR__ . '/src/data.php';
 
 // ID: očekujemo rewrite /apartments/1 -> apartment.php?id=1 (kao u listi linkova)
-$id  = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $apt = $id ? find_apartment($id) : null;
 
 if (!$apt) {
@@ -21,7 +21,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
 <main class="min-h-[60vh] bg-[#FAF7EE]">
   <div class="container mx-auto px-4 py-6 md:py-8">
     <a href="<?php echo url('apartments.php'); ?>"
-       class="inline-flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900">
+      class="inline-flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900">
       <?= htmlspecialchars(t('apt.back_to_all')) ?>
     </a>
 
@@ -34,10 +34,10 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
       <?php
       $metaParts = [];
       if (!empty($apt['beds'])) {
-        $metaParts[] = strtr(t('page.apartments.beds'),   ['{count}' => (int) $apt['beds']]);
+        $metaParts[] = strtr(t('page.apartments.beds'), ['{count}' => (int) $apt['beds']]);
       }
       if (!empty($apt['baths'])) {
-        $metaParts[] = strtr(t('page.apartments.baths'),  ['{count}' => (int) $apt['baths']]);
+        $metaParts[] = strtr(t('page.apartments.baths'), ['{count}' => (int) $apt['baths']]);
       }
       if (!empty($apt['guests'])) {
         $metaParts[] = strtr(t('page.apartments.guests'), ['{count}' => (int) $apt['guests']]);
@@ -54,7 +54,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
         <div class="relative rounded-xl bg-white border border-mediterranean-sand p-3">
           <?php
           // izaberi featured ili prvu
-          $images   = $apt['images'] ?? [];
+          $images = $apt['images'] ?? [];
           $featured = null;
           foreach ($images as $im) {
             if (!empty($im['featured']) || !empty($im['isFeatured'])) {
@@ -68,12 +68,9 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
           ?>
           <?php if ($featured): ?>
             <div class="relative">
-              <img
-                id="hero"
-                src="<?php echo htmlspecialchars($featured['url']); ?>"
+              <img id="hero" src="<?php echo htmlspecialchars($featured['url']); ?>"
                 alt="<?php echo htmlspecialchars($featured['alt'] ?? ($apt['name'] ?? '')); ?>"
-                class="w-full h-[260px] md:h-[360px] lg:h-[420px] object-cover rounded-lg"
-              />
+                class="w-full h-[260px] md:h-[360px] lg:h-[420px] object-cover rounded-lg" />
               <?php $total = count($images); ?>
               <?php if ($total > 1): ?>
                 <div
@@ -85,18 +82,13 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
 
             <?php if ($total > 1): ?>
               <div id="thumbs"
-                   class="mt-3 grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 max-h-[120px] overflow-y-auto pr-1">
+                class="mt-3 grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 max-h-[120px] overflow-y-auto pr-1">
                 <?php foreach ($images as $idx => $im): ?>
-                  <button
-                    type="button"
-                    data-index="<?php echo (int) $idx; ?>"
+                  <button type="button" data-index="<?php echo (int) $idx; ?>"
                     class="relative rounded-md overflow-hidden border border-transparent hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-mediterranean-blue focus:ring-offset-1">
-                    <img
-                      src="<?php echo htmlspecialchars($im['url']); ?>"
+                    <img src="<?php echo htmlspecialchars($im['url']); ?>"
                       alt="<?php echo htmlspecialchars($im['alt'] ?? ($apt['name'] ?? '')); ?>"
-                      class="w-full h-[70px] object-cover"
-                      loading="lazy"
-                    />
+                      class="w-full h-[70px] object-cover" loading="lazy" />
                   </button>
                 <?php endforeach; ?>
               </div>
@@ -109,25 +101,18 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
         </div>
 
         <!-- Tabs -->
-        <div class="mt-6 border-b border-mediterranean-sand">
+        <div class="border-b border-mediterranean-sand mt-6">
           <div class="flex gap-6 text-sm">
-            <button
-              type="button"
-              class="tab-btn pb-3 border-b-2 border-transparent text-gray-700 font-medium"
+            <button type="button"
+              class="tab-btn pb-3 border-b-2 border-mediterranean-blue text-mediterranean-blue-dark font-semibold"
               data-tab="desc">
               <?= htmlspecialchars(t('apt.description')) ?>
             </button>
-            <button
-              type="button"
-              class="tab-btn pb-3 border-b-2 border-transparent text-gray-700"
-              data-tab="amen">
+            <button type="button" class="tab-btn pb-3 border-b-2 border-transparent text-gray-700" data-tab="amen">
               <?= htmlspecialchars(t('apt.amenities')) ?>
             </button>
-            <button
-              type="button"
-              class="tab-btn pb-3 border-b-2 border-transparent text-gray-700"
-              data-tab="rules">
-              <?= htmlspecialchars(t('apt.house_rules')) ?>
+            <button type="button" class="tab-btn pb-3 border-b-2 border-transparent text-gray-700" data-tab="rules">
+              <?= htmlspecialchars(t('apt.rules')) ?>
             </button>
           </div>
         </div>
@@ -151,7 +136,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
                 <?php if (!empty($apt['rating'])): ?>
                   <span class="inline-flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 24 24"
-                         fill="currentColor" aria-hidden="true">
+                      fill="currentColor" aria-hidden="true">
                       <path
                         d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.788 1.402 8.17L12 18.897l-7.336 3.871 1.402-8.17L.132 9.21l8.2-1.192z" />
                     </svg>
@@ -173,7 +158,12 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
               <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-700 text-sm">
                 <?php foreach ($apt['amenities'] as $amen): ?>
                   <li class="flex items-center gap-2">
-                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-mediterranean-blue"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 20 20"
+                      fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0L3.293 9.207a1 1 0 011.414-1.414L8.5 11.586l6.793-6.793a1 1 0 011.414 0z"
+                        clip-rule="evenodd" />
+                    </svg>
                     <span><?php echo htmlspecialchars($amen); ?></span>
                   </li>
                 <?php endforeach; ?>
@@ -182,6 +172,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
               <p class="text-gray-500 text-sm">Amenities information is not available.</p>
             <?php endif; ?>
           </article>
+
 
           <!-- House Rules -->
           <article id="panel-rules" class="hidden">
@@ -210,10 +201,11 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
                 <?= htmlspecialchars(t('apt.per_night')) ?>
               </span>
             </div>
+
             <?php if (!empty($apt['rating'])): ?>
               <div class="flex items-center gap-1 text-sm text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 24 24"
-                     fill="currentColor" aria-hidden="true">
+                  fill="currentColor" aria-hidden="true">
                   <path
                     d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.788 1.402 8.17L12 18.897l-7.336 3.871 1.402-8.17L.132 9.211l8.207-1.193z" />
                 </svg>
@@ -230,8 +222,8 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
             <div class="flex flex-col gap-1">
               <div class="flex items-center gap-2 text-sm text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
-                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     aria-hidden="true">
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
                   <rect x="3" y="4" width="18" height="18" rx="2" />
                   <line x1="16" y1="2" x2="16" y2="6" />
                   <line x1="8" y1="2" x2="8" y2="6" />
@@ -244,22 +236,16 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
               <label for="dateRange" class="sr-only">
                 <?= htmlspecialchars(t('apt.dates')) ?>
               </label>
-              <!-- IMPORTANT: same id as na listingu -->
-              <input
-                id="dateRange"
-                type="text"
-                class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm"
-                placeholder="<?= htmlspecialchars(t('apt.dates_placeholder')) ?>"
-                autocomplete="off"
-              />
+              <input id="dateRange" type="text" name="dates" class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm"
+                placeholder="<?= htmlspecialchars(t('apt.dates_placeholder')) ?>" autocomplete="off" />
             </div>
 
             <!-- Guests -->
             <div class="flex flex-col gap-1">
               <div class="flex items-center gap-2 text-sm text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-mediterranean-blue" viewBox="0 0 24 24"
-                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true">
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
@@ -272,60 +258,43 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
               <label for="guests" class="sr-only">
                 <?= htmlspecialchars(t('apt.guests')) ?>
               </label>
-              <!-- IMPORTANT: same id as na listingu -->
-              <select
-                id="guests"
-                class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm"
-                required
-                aria-required="true">
-                <option value="" selected disabled hidden>
+              <select id="guests" name="guestsSelect" class="input-sand-apartments w-full rounded-md px-3 py-2 text-sm">
+                <option value="" disabled selected hidden>
                   <?= htmlspecialchars(t('apt.guests_placeholder')) ?>
                 </option>
-                <?php for ($g = 1; $g <= 4; $g++): ?>
-                  <option value="<?php echo $g; ?>">
-                    <?php echo htmlspecialchars(strtr(t('page.apartments.guests'), ['{count}' => $g])); ?>
-                  </option>
-                <?php endfor; ?>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>
             </div>
 
-            <!-- Price breakdown -->
-            <div class="border-t border-mediterranean-sand pt-3 space-y-2 text-sm text-gray-700">
-              <div class="flex justify-between">
-                <p class="text-sm text-gray-600">
-                  €<?php echo (int) ($apt['price'] ?? 0); ?> ×
-                  <span id="nights">0</span>
+            <div id="priceBreakdown" class="space-y-2 text-sm text-gray-700 border-t pt-3 mt-4 hidden">
+              <div class="flex items-baseline justify-between">
+                <p>
+                  €<span id="priceBottom"><?php echo (int) ($apt['price'] ?? 0); ?></span>
+                  × <span id="nights">0</span>
                   <?= htmlspecialchars(t('apt.night')) ?>
                 </p>
-                <p id="subtotal">€0</p>
+                <p id="subtotal" class="font-medium">€0</p>
               </div>
-              <div class="flex justify-between text-gray-600">
-                <p>Cleaning fee</p>
-                <p id="cleaning">€50</p>
-              </div>
-              <div class="flex justify-between text-gray-600">
-                <p>Service fee</p>
-                <p id="service">€0</p>
-              </div>
-              <div class="flex justify-between pt-2 border-t border-gray-200">
-                <p class="text-sm text-gray-800 font-medium">
-                  <?= htmlspecialchars(t('apt.total')) ?>
-                </p>
+
+              <div class="flex items-baseline justify-between font-semibold">
+                <p><?= htmlspecialchars(t('apt.total')) ?></p>
                 <p id="total" class="font-semibold text-mediterranean-blue-dark">€0</p>
               </div>
             </div>
 
-            <!-- Hidden fields to send if/when se radi real booking -->
+            <!-- Hidden fields (za pravi booking kasnije) -->
             <input type="hidden" name="from" id="from">
             <input type="hidden" name="to" id="to">
             <input type="hidden" name="guests" id="guestsInput">
             <input type="hidden" name="nights" id="nightsInput">
             <input type="hidden" name="total" id="totalInput">
 
-            <button
-              id="bookBtn"
-              type="submit"
-              class="w-full mt-2 inline-flex items-center justify-center rounded-md bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm font-medium">
+            <button id="bookBtn" type="submit"
+              class="w-full mt-2 inline-flex items-center justify-center rounded-md bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm font-medium"
+              disabled>
               <?= htmlspecialchars(t('apt.book_now')) ?>
             </button>
 
