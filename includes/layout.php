@@ -13,6 +13,17 @@ function site_head(string $title = 'Apartmani'): void
   $navBookNow = t('nav.book_now');
   $appName = t('app.name');
   $lang = current_lang();
+  $langCodes = [
+    'hr' => 'HR',
+    'en' => 'EN',
+    'de' => 'DE',
+    'fr' => 'FR',
+  ];
+  $currentLangCode = $langCodes[$lang] ?? strtoupper($lang);
+  $selHr = ($lang === 'hr') ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : '';
+  $selEn = ($lang === 'en') ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : '';
+  $selDe = ($lang === 'de') ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : '';
+  $selFr = ($lang === 'fr') ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : '';
 
   // trenutni script (fallback)
   $script = basename($_SERVER['SCRIPT_NAME'] ?? 'index.php');
@@ -95,14 +106,21 @@ function site_head(string $title = 'Apartmani'): void
           {$navBookNow}
         </a>
 
-        <div class="hidden md:flex items-center gap-2 text-xs">
-          <a href="{$hrefLangHr}" class="underline-offset-2 hover:underline">HR</a>
-          <span>|</span>
-          <a href="{$hrefLangEn}" class="underline-offset-2 hover:underline">EN</a>
-          <span>|</span>
-          <a href="{$hrefLangDe}" class="underline-offset-2 hover:underline">DE</a>
-          <span>|</span>
-          <a href="{$hrefLangFr}" class="underline-offset-2 hover:underline">FR</a>
+        <div class="relative hidden md:flex items-center text-xs">
+          <button id="langBtn" aria-haspopup="true" aria-expanded="false" class="inline-flex items-center gap-3 rounded px-3 py-1 text-sm font-medium hover:bg-black/5">
+            <span class="select-none">Language</span>
+            <span class="ml-1 inline-flex items-center justify-center bg-mediterranean-orange text-white rounded px-2 py-0.5 text-xs font-semibold">{$currentLangCode}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div id="langDropdown" class="hidden absolute right-0 top-full translate-y-1 w-44 bg-white rounded border border-gray-100 shadow-lg text-sm z-50 overflow-hidden">
+            <a href="{$hrefLangHr}" class="flex items-center justify-between px-4 py-2 hover:bg-gray-50">HR{$selHr}</a>
+            <a href="{$hrefLangEn}" class="flex items-center justify-between px-4 py-2 hover:bg-gray-50">EN{$selEn}</a>
+            <a href="{$hrefLangDe}" class="flex items-center justify-between px-4 py-2 hover:bg-gray-50">DE{$selDe}</a>
+            <a href="{$hrefLangFr}" class="flex items-center justify-between px-4 py-2 hover:bg-gray-50">FR{$selFr}</a>
+          </div>
         </div>
       </nav>
 
@@ -123,6 +141,16 @@ function site_head(string $title = 'Apartmani'): void
           <span class="inline-block w-2 h-2 rounded-full bg-white/90"></span>
           {$navBookNow}
         </a>
+
+        <div class="pt-2">
+          <button id="mobileLangBtn" class="w-full text-left px-2 py-2 rounded hover:bg-black/5">Language <span class="ml-2 inline-flex items-center bg-mediterranean-orange text-white text-xs px-2 py-0.5 rounded">{$currentLangCode}</span></button>
+          <div id="mobileLangMenu" class="hidden pl-2 mt-1">
+            <a href="{$hrefLangHr}" class="block px-3 py-2 rounded hover:bg-gray-50">HR{$selHr}</a>
+            <a href="{$hrefLangEn}" class="block px-3 py-2 rounded hover:bg-gray-50">EN{$selEn}</a>
+            <a href="{$hrefLangDe}" class="block px-3 py-2 rounded hover:bg-gray-50">DE{$selDe}</a>
+            <a href="{$hrefLangFr}" class="block px-3 py-2 rounded hover:bg-gray-50">FR{$selFr}</a>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
@@ -131,6 +159,37 @@ function site_head(string $title = 'Apartmani'): void
       const btn = document.getElementById('menuBtn');
       const nav = document.getElementById('mobileNav');
       if (btn && nav) btn.addEventListener('click', () => nav.classList.toggle('hidden'));
+
+      // Desktop language dropdown
+      const langBtn = document.getElementById('langBtn');
+      const langDropdown = document.getElementById('langDropdown');
+      if (langBtn && langDropdown) {
+        langBtn.addEventListener('click', function (e) {
+          const expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          langDropdown.classList.toggle('hidden');
+          e.stopPropagation();
+        });
+      }
+
+      // Mobile language toggle
+      const mobileLangBtn = document.getElementById('mobileLangBtn');
+      const mobileLangMenu = document.getElementById('mobileLangMenu');
+      if (mobileLangBtn && mobileLangMenu) {
+        mobileLangBtn.addEventListener('click', function () {
+          mobileLangMenu.classList.toggle('hidden');
+        });
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function (e) {
+        if (langDropdown && !langDropdown.classList.contains('hidden')) {
+          if (!langDropdown.contains(e.target) && !langBtn.contains(e.target)) {
+            langDropdown.classList.add('hidden');
+            if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
     });
   </script>
 HTML;
