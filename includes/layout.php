@@ -145,10 +145,10 @@ function site_head(string $title = 'Apartmani'): void
         <div class="pt-2">
           <button id="mobileLangBtn" class="w-full text-left px-2 py-2 rounded hover:bg-black/5">Language <span class="ml-2 inline-flex items-center bg-mediterranean-orange text-white text-xs px-2 py-0.5 rounded">{$currentLangCode}</span></button>
           <div id="mobileLangMenu" class="hidden pl-2 mt-1">
-            <a href="{$hrefLangHr}" class="block px-3 py-2 rounded hover:bg-gray-50">HR{$selHr}</a>
-            <a href="{$hrefLangEn}" class="block px-3 py-2 rounded hover:bg-gray-50">EN{$selEn}</a>
-            <a href="{$hrefLangDe}" class="block px-3 py-2 rounded hover:bg-gray-50">DE{$selDe}</a>
-            <a href="{$hrefLangFr}" class="block px-3 py-2 rounded hover:bg-gray-50">FR{$selFr}</a>
+            <a href="{$hrefLangHr}" class="flex items-center justify-between px-3 py-2 rounded hover:bg-gray-50">HR{$selHr}</a>
+            <a href="{$hrefLangEn}" class="flex items-center justify-between px-3 py-2 rounded hover:bg-gray-50">EN{$selEn}</a>
+            <a href="{$hrefLangDe}" class="flex items-center justify-between px-3 py-2 rounded hover:bg-gray-50">DE{$selDe}</a>
+            <a href="{$hrefLangFr}" class="flex items-center justify-between px-3 py-2 rounded hover:bg-gray-50">FR{$selFr}</a>
           </div>
         </div>
       </nav>

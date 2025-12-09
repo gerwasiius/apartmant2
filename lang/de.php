@@ -33,9 +33,15 @@ return [
     'location.title' => 'Umgebung erkunden',
     'location.subtitle' => 'Alles, was Sie brauchen, ist nur wenige Minuten entfernt.',
 
-    // About page
     'page.about.title' => 'Über uns',
     'page.about.text' => 'Diese PHP-Version folgt Layout und Verhalten der ursprünglichen Next.js-Website.',
+    'page.about.para1' => 'Wir leben in der wunderschönen Schweiz und haben seit etwa 30 Jahren eine besondere Verbindung zu Medulin in Kroatien. Mitte der 1990er Jahre beschlossen wir, neue Wurzeln in diesem kleinen Fischerort zu schlagen und verbringen seither unsere Freizeit in Medulin und pflegen unser Haus und unseren Garten mit Liebe.',
+    'page.about.para2' => 'Unsere Liebe zu diesem malerischen Ort an der Adria, die vielen sonnigen Tage im Jahr und der Duft von Zitronen, Feigen und Oliven inspirieren uns, anderen die Möglichkeit zu geben, die Schönheit und Gastfreundschaft Medulins zu erleben.',
+    'page.about.para3' => 'Als stolze Eltern von drei Töchtern, die nun ihre eigenen Familien gegründet haben, verbringen wir gerne Zeit mit ihnen, besonders während unserer gemeinsamen Urlaube.',
+    'page.about.para4' => 'Diese gemeinsamen Momente in Medulin sind uns von unschätzbarem Wert, und wir freuen uns darauf, Ihnen einen unvergesslichen Aufenthalt in unseren Apartments zu bieten.',
+    'page.about.para5' => 'Wir laden Sie ein, Teil unserer Geschichte zu werden und die Schönheit Medulins zu entdecken!',
+    'page.about.footer_greeting' => 'Willkommen!',
+    'page.about.footer_names' => 'Veronika und Željko Majstorić',
 
     // Contact page
     'page.contact.title' => 'Kontakt',

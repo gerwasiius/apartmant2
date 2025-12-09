@@ -23,34 +23,28 @@ site_head(t('page.about.title') . ' - ' . t('app.name'));
         </h1>
 
         <p>
-          Živimo u prekrasnoj Švicarskoj i već oko 30 godina imamo posebnu vezu s Medulinom u Hrvatskoj.
-          Sredinom 1990-ih odlučili smo pustiti novo korijenje u malom ribarskom mjestu i od tada provodimo
-          svoje slobodno vrijeme u Medulinu, s ljubavlju održavajući kuću i vrt živima.
+          <?= htmlspecialchars(t('page.about.para1')) ?>
         </p>
 
         <p>
-          Naša ljubav prema ovom slikovitom mjestu na jadranskoj obali, mnogi sunčani dani u godini i miris
-          limuna, smokava i maslina nadahnuli su nas da drugima pružimo priliku da dožive ljepotu i
-          gostoljubivost Medulina.
+          <?= htmlspecialchars(t('page.about.para2')) ?>
         </p>
 
         <p>
-          Kao ponosni roditelji triju kćeri koje su sada osnovale vlastite obitelji, uživamo provoditi vrijeme
-          s njima, posebno tijekom naših zajedničkih odmora.
+          <?= htmlspecialchars(t('page.about.para3')) ?>
         </p>
 
         <p>
-          Ovi zajednički trenuci u Medulinu su nam neprocjenjivi i radujemo se što ćemo vam pružiti nezaboravan
-          boravak u našim apartmanima.
+          <?= htmlspecialchars(t('page.about.para4')) ?>
         </p>
 
         <p>
-          Pozivamo vas da postanete dio naše povijesti i otkrijete ljepotu Medulina!
+          <?= htmlspecialchars(t('page.about.para5')) ?>
         </p>
 
         <div class="pt-2 space-y-1">
-          <p class="font-semibold text-mediterranean-blue-dark">Dobrodošli!</p>
-          <p class="text-mediterranean-blue-dark">Veronika i Željko Majstorić</p>
+          <p class="font-semibold text-mediterranean-blue-dark"><?= htmlspecialchars(t('page.about.footer_greeting')) ?></p>
+          <p class="text-mediterranean-blue-dark"><?= htmlspecialchars(t('page.about.footer_names')) ?></p>
         </div>
       </div>
     </div>

@@ -36,6 +36,13 @@ return [
     // Stranice
     'page.about.title' => 'O nama',
     'page.about.text' => 'Ovo je PHP verzija stranice koja prati izgled i ponašanje originalne Next.js verzije.',
+    'page.about.para1' => 'Živimo u prekrasnoj Švicarskoj i već oko 30 godina imamo posebnu vezu s Medulinom u Hrvatskoj. Sredinom 1990-ih odlučili smo pustiti novo korijenje u malom ribarskom mjestu i od tada provodimo svoje slobodno vrijeme u Medulinu, s ljubavlju održavajući kuću i vrt živima.',
+    'page.about.para2' => 'Naša ljubav prema ovom slikovitom mjestu na jadranskoj obali, mnogi sunčani dani u godini i miris limuna, smokava i maslina nadahnuli su nas da drugima pružimo priliku da dožive ljepotu i gostoljubivost Medulina.',
+    'page.about.para3' => 'Kao ponosni roditelji triju kćeri koje su sada osnovale vlastite obitelji, uživamo provoditi vrijeme s njima, posebno tijekom naših zajedničkih odmora.',
+    'page.about.para4' => 'Ovi zajednički trenuci u Medulinu su nam neprocjenjivi i radujemo se što ćemo vam pružiti nezaboravan boravak u našim apartmanima.',
+    'page.about.para5' => 'Pozivamo vas da postanete dio naše povijesti i otkrijete ljepotu Medulina!',
+    'page.about.footer_greeting' => 'Dobrodošli!',
+    'page.about.footer_names' => 'Veronika i Željko Majstorić',
 
     'page.contact.title' => 'Kontakt',
     'page.contact.text' => 'Pošaljite nam upit putem e-maila ili telefona.',

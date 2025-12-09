@@ -234,6 +234,13 @@ document.addEventListener("DOMContentLoaded", function () {
     minDate: "today",
     disableMobile: true,
     locale: currentLocale,
+    onReady: (selectedDates, dateStr, instance) => {
+      // Osiguraj da je showMonths pravilno postavljen pri inicijalizaciji
+      const correctMonths = getShowMonths();
+      if (instance.config.showMonths !== correctMonths) {
+        instance.set("showMonths", correctMonths);
+      }
+    },
     onOpen: () => {
       el.classList.add("is-open");
       // Ako se veličina ekrana promijenila nakon što je kalendar otvoren
@@ -241,8 +248,28 @@ document.addEventListener("DOMContentLoaded", function () {
       if (fp.config.showMonths !== newMonths) {
         fp.set("showMonths", newMonths);
       }
+      
+      // Na manjim ekranima (mobilne uređaje), centrira kalendar
+      if (window.innerWidth <= 768) {
+        const calendar = fp.calendarContainer;
+        if (calendar) {
+          calendar.style.position = 'fixed';
+          calendar.style.left = '50%';
+          calendar.style.top = '50%';
+          calendar.style.transform = 'translate(-50%, -50%)';
+          calendar.style.width = 'calc(100% - 16px)';
+          calendar.style.zIndex = '99999';
+        }
+      }
     },
-    onClose: () => el.classList.remove("is-open"),
+    onClose: () => {
+      el.classList.remove("is-open");
+      // Resetiraj showMonths prema trenutnoj veličini ekrana
+      const newMonths = getShowMonths();
+      if (fp.config.showMonths !== newMonths) {
+        fp.set("showMonths", newMonths);
+      }
+    },
 
     // NOVO: svaki put kad korisnik promijeni datume -> pošalji change event
     onChange: () => {
@@ -253,13 +280,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Prilagodi kalendar ako se prozor skalira
   let resizeTimeout;
+  let lastInnerWidth = window.innerWidth;
+  
   window.addEventListener("resize", () => {
-    if (!fp.isOpen) return;
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
+      const newInnerWidth = window.innerWidth;
       const newMonths = getShowMonths();
-      if (fp.config.showMonths !== newMonths) {
-        fp.set("showMonths", newMonths);
+      
+      // Samo ako se zaista promijenila veličina ekrana
+      if (Math.abs(newInnerWidth - lastInnerWidth) > 50) {
+        lastInnerWidth = newInnerWidth;
+        
+        if (fp.config.showMonths !== newMonths) {
+          // Ako je kalendar otvoren, zatvori ga, promijeni konfiguraciju i ponovno otvori
+          if (fp.isOpen) {
+            const wasOpen = true;
+            fp.close();
+            fp.set("showMonths", newMonths);
+            // Malo debounce prije nego što ponovo otvorim
+            setTimeout(() => fp.open(), 50);
+          } else {
+            // Ako nije otvoren, samo promijeni konfiguraciju
+            fp.set("showMonths", newMonths);
+          }
+        }
       }
     }, 250);
   });

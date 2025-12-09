@@ -36,6 +36,13 @@ return [
     // About page
     'page.about.title' => 'À propos de nous',
     'page.about.text' => 'Cette version PHP reprend la mise en page et le comportement du site Next.js original.',
+    'page.about.para1' => 'Nous vivons en Suisse magnifique et avons une connexion particulière à Medulin en Croatie depuis environ 30 ans. Au milieu des années 1990, nous avons décidé de nous enraciner dans ce petit village de pêcheurs et depuis lors, nous passons nos loisirs à Medulin, en entretenant avec amour notre maison et notre jardin.',
+    'page.about.para2' => 'Notre amour pour cet endroit pittoresque sur la côte adriatique, les nombreuses journées ensoleillées de l\'année et le parfum des citrons, des figues et des olives nous ont inspiré à offrir à d\'autres l\'opportunité de découvrir la beauté et l\'hospitalité de Medulin.',
+    'page.about.para3' => 'Fiers parents de trois filles qui ont maintenant fondé leurs propres familles, nous aimons passer du temps avec elles, notamment lors de nos vacances communes.',
+    'page.about.para4' => 'Ces moments partagés à Medulin nous sont inestimables, et nous nous réjouissons de vous offrir un séjour inoubliable dans nos appartements.',
+    'page.about.para5' => 'Nous vous invitons à faire partie de notre histoire et à découvrir la beauté de Medulin!',
+    'page.about.footer_greeting' => 'Bienvenue!',
+    'page.about.footer_names' => 'Veronika et Željko Majstorić',
 
     // Contact page
     'page.contact.title' => 'Contact',

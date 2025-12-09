@@ -21,7 +21,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
 <main class="min-h-[60vh] bg-[#FAF7EE]">
   <div class="container mx-auto px-4 py-6 md:py-8">
     <a href="<?php echo url('apartments.php'); ?>"
-      class="inline-flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900">
+      class="inline-flex items-center gap-2 text-base font-medium text-mediterranean-blue-dark hover:text-mediterranean-blue">
       <?= htmlspecialchars(t('apt.back_to_all')) ?>
     </a>
 
@@ -29,24 +29,32 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
       <?php echo htmlspecialchars($apt['name'] ?? ''); ?>
     </h1>
 
-    <p class="mt-1 text-gray-600">
-      <?php echo htmlspecialchars($apt['subName'] ?? ''); ?>
-      <?php
-      $metaParts = [];
-      if (!empty($apt['beds'])) {
-        $metaParts[] = strtr(t('page.apartments.beds'), ['{count}' => (int) $apt['beds']]);
-      }
-      if (!empty($apt['baths'])) {
-        $metaParts[] = strtr(t('page.apartments.baths'), ['{count}' => (int) $apt['baths']]);
-      }
-      if (!empty($apt['guests'])) {
-        $metaParts[] = strtr(t('page.apartments.guests'), ['{count}' => (int) $apt['guests']]);
-      }
-      if ($metaParts) {
-        echo ' · ' . htmlspecialchars(implode(' · ', $metaParts));
-      }
-      ?>
-    </p>
+    <?php if (!empty($apt['subName'])): ?>
+      <p class="mt-1 text-gray-500 text-sm"><?php echo htmlspecialchars($apt['subName']); ?></p>
+    <?php endif; ?>
+
+    <div class="mt-2 flex items-center gap-6 text-gray-600 text-sm">
+      <?php if (!empty($apt['beds'])): ?>
+        <span class="inline-flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M8 7v-2a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+          <span><?php echo strtr(t('page.apartments.beds'), ['{count}' => (int) $apt['beds']]); ?></span>
+        </span>
+      <?php endif; ?>
+
+      <?php if (!empty($apt['baths'])): ?>
+        <span class="inline-flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
+          <span><?php echo strtr(t('page.apartments.baths'), ['{count}' => (int) $apt['baths']]); ?></span>
+        </span>
+      <?php endif; ?>
+
+      <?php if (!empty($apt['guests'])): ?>
+        <span class="inline-flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <span><?php echo strtr(t('page.apartments.guests'), ['{count}' => (int) $apt['guests']]); ?></span>
+        </span>
+      <?php endif; ?>
+    </div>
 
     <div class="mt-4 grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
       <!-- LEFT: Gallery + Tabs -->
@@ -131,25 +139,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
               </p>
             <?php endif; ?>
 
-            <?php if (!empty($apt['rating']) || !empty($apt['reviews'])): ?>
-              <div class="mt-4 flex items-center gap-2 text-sm text-gray-700">
-                <?php if (!empty($apt['rating'])): ?>
-                  <span class="inline-flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 24 24"
-                      fill="currentColor" aria-hidden="true">
-                      <path
-                        d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.788 1.402 8.17L12 18.897l-7.336 3.871 1.402-8.17L.132 9.21l8.2-1.192z" />
-                    </svg>
-                    <span><?php echo htmlspecialchars(number_format((float) $apt['rating'], 1)); ?></span>
-                  </span>
-                <?php endif; ?>
-                <?php if (!empty($apt['reviews'])): ?>
-                  <span class="text-gray-500">
-                    · <?php echo (int) $apt['reviews']; ?> reviews
-                  </span>
-                <?php endif; ?>
-              </div>
-            <?php endif; ?>
+            <!-- Reviews/ratings removed as per site requirements -->
           </article>
 
           <!-- Amenities -->
@@ -202,19 +192,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
               </span>
             </div>
 
-            <?php if (!empty($apt['rating'])): ?>
-              <div class="flex items-center gap-1 text-sm text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 24 24"
-                  fill="currentColor" aria-hidden="true">
-                  <path
-                    d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.788 1.402 8.17L12 18.897l-7.336 3.871 1.402-8.17L.132 9.211l8.207-1.193z" />
-                </svg>
-                <span><?php echo htmlspecialchars(number_format((float) $apt['rating'], 1)); ?></span>
-                <?php if (!empty($apt['reviews'])): ?>
-                  <span class="text-gray-500"> (<?php echo (int) $apt['reviews']; ?>)</span>
-                <?php endif; ?>
-              </div>
-            <?php endif; ?>
+            <!-- Rating/reviews intentionally removed -->
           </div>
 
           <form class="mt-4 space-y-4" method="post" action="#">

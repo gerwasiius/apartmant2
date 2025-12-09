@@ -30,6 +30,13 @@ return [
 
     'page.about.title' => 'About us',
     'page.about.text' => 'This PHP version follows the layout and behaviour of the original Next.js site.',
+    'page.about.para1' => 'We live in beautiful Switzerland and have had a special connection to Medulin in Croatia for about 30 years. In the mid-1990s, we decided to put down new roots in this small fishing village and have since spent our free time in Medulin, lovingly keeping our house and garden alive.',
+    'page.about.para2' => 'Our love for this picturesque place on the Adriatic coast, the many sunny days of the year, and the scent of lemons, figs, and olives inspired us to give others the opportunity to experience the beauty and hospitality of Medulin.',
+    'page.about.para3' => 'As proud parents of three daughters who have now started their own families, we enjoy spending time with them, especially during our shared holidays.',
+    'page.about.para4' => 'These shared moments in Medulin are invaluable to us, and we look forward to providing you with an unforgettable stay in our apartments.',
+    'page.about.para5' => 'We invite you to become part of our story and discover the beauty of Medulin!',
+    'page.about.footer_greeting' => 'Welcome!',
+    'page.about.footer_names' => 'Veronika and Željko Majstorić',
 
     'page.contact.title' => 'Contact',
     'page.contact.text' => 'Send us an inquiry by email or phone.',
