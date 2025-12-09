@@ -37,7 +37,11 @@ $apartments = load_apartments();
               <div class="apart-slide">
                 <article class="apart-card">
                   <div class="apart-media">
-                    <img src="<?= htmlspecialchars($featured['url'] ?? '/placeholder.svg'); ?>"
+                    <?php
+                    $imgUrl = $featured['url'] ?? '/placeholder.svg';
+                    $imgUrl = str_replace(['/image/','image/','/images/','images/'], 'assets/images/', $imgUrl);
+                    ?>
+                    <img src="<?= htmlspecialchars($imgUrl); ?>"
                       alt="<?= htmlspecialchars($featured['alt'] ?? $ap['name']); ?>">
                     <?php if ($photosCount > 1): ?>
                       <div class="apart-badge"><?= $photosCount; ?> photos</div><?php endif; ?>
@@ -49,35 +53,22 @@ $apartments = load_apartments();
                     <p class="apart-desc"><?= htmlspecialchars($ap['description']); ?></p>
                     <div class="apart-meta">
                       <span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M4 12V7a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v5M4 21v-3m16 3v-3M4 15h16v3H4z" />
-                        </svg>
-                        <?= (int) $ap['beds']; ?> beds
+                        <img src="<?= htmlspecialchars('../assets/images/beds.svg'); ?>" alt="krevet" class="meta-icon">
+                        <?= (int) $ap['beds']; ?> krevet
                       </span>
                       <?php if (!empty($ap['sofaBeds'])): ?>
                         <span>
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="8" width="18" height="4" rx="1" />
-                            <rect x="2" y="12" width="20" height="6" rx="1" />
-                          </svg>
-                          <?= (int) $ap['sofaBeds']; ?> sofa bed<?= $ap['sofaBeds'] > 1 ? 's' : ''; ?>
+                          <img src="<?= htmlspecialchars('/assets/images/sofabed.svg'); ?>" alt="secija" class="meta-icon">
+                            <?= (int) $ap['sofaBeds']; ?> secija<?= $ap['sofaBeds'] > 1 ? 's' : ''; ?>
                         </span>
                       <?php endif; ?>
                       <span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M3 10h18v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-6Z" />
-                          <path d="M7 10V5a3 3 0 1 1 6 0v5" />
-                        </svg>
-                        <?= (int) $ap['baths']; ?> bath
+                        <img src="<?= htmlspecialchars('/assets/images/baths.svg'); ?>" alt="kupatilo" class="meta-icon">
+                        <?= (int) $ap['baths']; ?> kupatilo
                       </span>
                       <span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                          <circle cx="9" cy="7" r="4" />
-                          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        </svg>
-                        <?= (int) $ap['guests']; ?> guests
+                        <img src="<?= htmlspecialchars('/assets/images/guests.svg'); ?>" alt="gosti" class="meta-icon">
+                        <?= (int) $ap['guests']; ?> gosti
                       </span>
                     </div>
                   </div>

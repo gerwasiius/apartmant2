@@ -217,6 +217,28 @@ footer.border-t { padding-top: 12px; }
   color: var(--med-blue);
 }
 
+/* Ensure external image icons match inline SVG size/alignment */
+.apart-meta img.meta-icon,
+.apart-meta .meta-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: inline-block;
+  object-fit: contain;
+}
+
+/* Global rule: ensure any element with .meta-icon is sized like the inline SVGs
+   (applies to featured section and the apartments list) */
+.meta-icon {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+  display: inline-block;
+  object-fit: contain;
+  margin-right: .35rem; /* match spacing used by apart-meta spans */
+  vertical-align: middle;
+}
+
 /* footer karte – cijena lijevo, gumb desno, poravnato */
 .apart-foot {
   display: flex;

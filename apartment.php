@@ -36,21 +36,21 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
     <div class="mt-2 flex items-center gap-6 text-gray-600 text-sm">
       <?php if (!empty($apt['beds'])): ?>
         <span class="inline-flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M8 7v-2a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+          <img src="<?= htmlspecialchars('assets/images/beds.svg'); ?>" alt="beds" class="meta-icon">
           <span><?php echo strtr(t('page.apartments.beds'), ['{count}' => (int) $apt['beds']]); ?></span>
         </span>
       <?php endif; ?>
 
       <?php if (!empty($apt['baths'])): ?>
         <span class="inline-flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
+          <img src="<?= htmlspecialchars('assets/images/baths.svg'); ?>" alt="baths" class="meta-icon">
           <span><?php echo strtr(t('page.apartments.baths'), ['{count}' => (int) $apt['baths']]); ?></span>
         </span>
       <?php endif; ?>
 
       <?php if (!empty($apt['guests'])): ?>
         <span class="inline-flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <img src="<?= htmlspecialchars('assets/images/guests.svg'); ?>" alt="guests" class="meta-icon">
           <span><?php echo strtr(t('page.apartments.guests'), ['{count}' => (int) $apt['guests']]); ?></span>
         </span>
       <?php endif; ?>

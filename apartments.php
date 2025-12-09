@@ -183,37 +183,21 @@ site_head(t('page.apartments.title') . ' - Apartmani');
                   <!-- META: kreveta / kupaonica / gosti -->
                   <div class="flex flex-wrap items-center gap-4 text-sm text-gray-800">
                     <div class="flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor">
-                        <path d="M4 21v-7a2 2 0 0 1 2-2h3v9" />
-                        <path d="M9 21V10" />
-                        <path d="M9 6.5A2.5 2.5 0 0 1 11.5 4H20a1 1 0 0 1 1 1v7H9" />
-                        <path d="M16 3v3" />
-                        <path d="M12 3v3" />
-                      </svg>
+                        <img src="<?= htmlspecialchars('assets/images/beds.svg'); ?>" alt="beds" class="meta-icon"> 
                       <?= htmlspecialchars(
                         t('page.apartments.beds', ['count' => (int) ($a['beds'] ?? 0)])
                       ); ?>
                     </div>
 
                     <div class="flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor">
-                        <path d="M4 12V7a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v5M4 21v-3m16 3v-3M4 15h16v3H4z" />
-                      </svg>
+                      <img src="<?= htmlspecialchars('assets/images/baths.svg'); ?>" alt="baths" class="meta-icon"> 
                       <?= htmlspecialchars(
                         t('page.apartments.baths', ['count' => (int) ($a['baths'] ?? 0)])
                       ); ?>
                     </div>
 
                     <div class="flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-mediterranean-blue" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                        <circle cx="9" cy="7" r="4" />
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                      </svg>
+                      <img src="<?= htmlspecialchars('assets/images/guests.svg'); ?>" alt="guests" class="meta-icon"> 
                       <?= htmlspecialchars(
                         t('page.apartments.guests', ['count' => (int) ($a['guests'] ?? 0)])
                       ); ?>
