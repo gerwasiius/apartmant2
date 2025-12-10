@@ -1,9 +1,21 @@
 <?php
 require_once __DIR__ . '/config/bootstrap.php';
 $apartments = load_apartments();
+$sortParam = $_GET['sort'] ?? 'asc';
 $fromParam = $_GET['from'] ?? '';
 $toParam = $_GET['to'] ?? '';
 $guestsParam = $_GET['guests'] ?? '';
+
+// Sortiraj apartmane prema parametru
+if ($sortParam === 'desc') {
+  usort($apartments, function ($a, $b) {
+    return ($b['price'] ?? 0) <=> ($a['price'] ?? 0);
+  });
+} else {
+  usort($apartments, function ($a, $b) {
+    return ($a['price'] ?? 0) <=> ($b['price'] ?? 0);
+  });
+}
 
 $count = count($apartments);
 $countText = t('page.apartments.showing', ['count' => $count]);
@@ -95,11 +107,11 @@ site_head(t('page.apartments.title') . ' - Apartmani');
           <p class="text-gray-600">
             <?= htmlspecialchars($countText) ?>
           </p>
-          <select class="rounded-md border border-mediterranean-sand bg-white px-3 py-2 text-sm">
-            <option>
+          <select id="sortSelect" class="rounded-md border border-mediterranean-sand bg-white px-3 py-2 text-sm">
+            <option value="asc" <?= $sortParam === 'asc' ? 'selected' : '' ?>>
               <?= htmlspecialchars(t('page.apartments.sort_price_asc')) ?>
             </option>
-            <option>
+            <option value="desc" <?= $sortParam === 'desc' ? 'selected' : '' ?>>
               <?= htmlspecialchars(t('page.apartments.sort_price_desc')) ?>
             </option>
           </select>
@@ -220,4 +232,14 @@ site_head(t('page.apartments.title') . ' - Apartmani');
     </div>
   </div>
 </main>
+
+<script>
+  document.getElementById('sortSelect').addEventListener('change', function(e) {
+    const sortValue = e.target.value;
+    const params = new URLSearchParams(window.location.search);
+    params.set('sort', sortValue);
+    window.location.href = window.location.pathname + '?' + params.toString();
+  });
+</script>
+
 <?php site_footer(); ?>
