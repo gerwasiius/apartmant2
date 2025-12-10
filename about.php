@@ -5,12 +5,20 @@ site_head(t('page.about.title') . ' - ' . t('app.name'));
 
 <main class="min-h-[60vh] bg-mediterranean-beige">
   <!-- Gornja hero slika kao na v0-medulin /about -->
+      <!-- src="https://sssef5nrxfikvijy.public.blob.vercel-storage.com/zeljkoxveronika-qKwqAGveXOIsXyL44kZxnyk8jqJ9fH.png" -->
+
   <section class="relative w-full h-[320px] md:h-[420px] overflow-hidden">
-    <img
-      src="https://sssef5nrxfikvijy.public.blob.vercel-storage.com/zeljkoxveronika-qKwqAGveXOIsXyL44kZxnyk8jqJ9fH.png"
-      alt="Veronika i Željko Majstorić u Medulinu"
-      class="w-full h-full object-cover"
-    />
+    <picture>
+      <source
+        media="(max-width: 767px)"
+        srcset="/assets/images/about/zeljkoxveronika-cropped-picture.webp"
+      />
+      <img
+        src="/assets/images/about/zeljkoxveronika-full-picture.webp"
+        alt="Veronika i Željko Majstorić u Medulinu"
+        class="w-full h-full object-cover"
+      />
+    </picture>
   </section>
 
   <!-- Tekstualni dio (sredina stranice) -->
