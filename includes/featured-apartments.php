@@ -53,21 +53,21 @@ $apartments = load_apartments();
                     <p class="apart-desc"><?= htmlspecialchars($ap['description']); ?></p>
                     <div class="apart-meta">
                       <span>
-                        <img src="<?= htmlspecialchars('../assets/images/beds.svg'); ?>" alt="krevet" class="meta-icon">
+                        <img src="<?= htmlspecialchars(url('assets/images/beds.svg')); ?>" alt="krevet" class="meta-icon">
                         <?= (int) $ap['beds']; ?> krevet
                       </span>
                       <?php if (!empty($ap['sofaBeds'])): ?>
                         <span>
-                          <img src="<?= htmlspecialchars('/assets/images/sofabed.svg'); ?>" alt="secija" class="meta-icon">
+                          <img src="<?= htmlspecialchars(url('assets/images/sofabed.svg')); ?>" alt="secija" class="meta-icon">
                             <?= (int) $ap['sofaBeds']; ?> secija<?= $ap['sofaBeds'] > 1 ? 's' : ''; ?>
                         </span>
                       <?php endif; ?>
                       <span>
-                        <img src="<?= htmlspecialchars('/assets/images/baths.svg'); ?>" alt="kupatilo" class="meta-icon">
+                        <img src="<?= htmlspecialchars(url('assets/images/baths.svg')); ?>" alt="kupatilo" class="meta-icon">
                         <?= (int) $ap['baths']; ?> kupatilo
                       </span>
                       <span>
-                        <img src="<?= htmlspecialchars('/assets/images/guests.svg'); ?>" alt="gosti" class="meta-icon">
+                        <img src="<?= htmlspecialchars(url('assets/images/guests.svg')); ?>" alt="gosti" class="meta-icon">
                         <?= (int) $ap['guests']; ?> gosti
                       </span>
                     </div>
@@ -76,7 +76,7 @@ $apartments = load_apartments();
                     <div class="apart-price">€<?= (int) $ap['price']; ?> <small>/ night</small></div>
                     <a
                       class="apart-btn"
-                      href="<?= htmlspecialchars(url('apartment.php?id=' . (int) $ap['id'])); ?>">
+                      href="<?= htmlspecialchars(url('pages/apartment.php?id=' . (int) $ap['id'])); ?>">
                       <?= htmlspecialchars(t('page.apartments.view_details')); ?>
                     </a>
                   </div>

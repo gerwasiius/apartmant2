@@ -1,7 +1,7 @@
 <?php
 // apartment.php
-require_once __DIR__ . '/config/bootstrap.php';
-require_once __DIR__ . '/src/data.php';
+require_once __DIR__ . '/../config/bootstrap.php';
+require_once __DIR__ . '/../src/data.php';
 
 // ID: očekujemo rewrite /apartments/1 -> apartment.php?id=1 (kao u listi linkova)
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
@@ -20,7 +20,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
 
 <main class="min-h-[60vh] bg-[#FAF7EE]">
   <div class="container mx-auto px-4 py-6 md:py-8">
-    <a href="<?php echo url('apartments.php'); ?>"
+    <a href="<?php echo url('pages/apartments.php'); ?>"
       class="inline-flex items-center gap-2 text-base font-medium text-mediterranean-blue-dark hover:text-mediterranean-blue">
       <?= htmlspecialchars(t('apt.back_to_all')) ?>
     </a>
@@ -36,21 +36,21 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
     <div class="mt-2 flex items-center gap-6 text-gray-600 text-sm">
       <?php if (!empty($apt['beds'])): ?>
         <span class="inline-flex items-center gap-2">
-          <img src="<?= htmlspecialchars('assets/images/beds.svg'); ?>" alt="beds" class="meta-icon">
+          <img src="<?= htmlspecialchars(url('assets/images/beds.svg')); ?>" alt="beds" class="meta-icon">
           <span><?php echo strtr(t('page.apartments.beds'), ['{count}' => (int) $apt['beds']]); ?></span>
         </span>
       <?php endif; ?>
 
       <?php if (!empty($apt['baths'])): ?>
         <span class="inline-flex items-center gap-2">
-          <img src="<?= htmlspecialchars('assets/images/baths.svg'); ?>" alt="baths" class="meta-icon">
+          <img src="<?= htmlspecialchars(url('assets/images/baths.svg')); ?>" alt="baths" class="meta-icon">
           <span><?php echo strtr(t('page.apartments.baths'), ['{count}' => (int) $apt['baths']]); ?></span>
         </span>
       <?php endif; ?>
 
       <?php if (!empty($apt['guests'])): ?>
         <span class="inline-flex items-center gap-2">
-          <img src="<?= htmlspecialchars('assets/images/guests.svg'); ?>" alt="guests" class="meta-icon">
+          <img src="<?= htmlspecialchars(url('assets/images/guests.svg')); ?>" alt="guests" class="meta-icon">
           <span><?php echo strtr(t('page.apartments.guests'), ['{count}' => (int) $apt['guests']]); ?></span>
         </span>
       <?php endif; ?>
@@ -263,7 +263,7 @@ site_head(htmlspecialchars($apt['name'] ?? '') . ' - ' . t('app.name'));
               </div>
             </div>
 
-            <!-- Hidden fields (za pravi booking kasnije) -->
+            <!-- Hidden fields (za pravi booking senere) -->
             <input type="hidden" name="from" id="from">
             <input type="hidden" name="to" id="to">
             <input type="hidden" name="guests" id="guestsInput">

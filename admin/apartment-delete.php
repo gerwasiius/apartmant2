@@ -21,11 +21,11 @@ if (!$apartment) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm'])) {
     try {
         // Delete apartment and all related data
-        db_exec('DELETE FROM apartment_translations WHERE apartment_id = ?', [$aptId]);
-        db_exec('DELETE FROM images WHERE apartment_id = ?', [$aptId]);
-        db_exec('DELETE FROM apartment_amenities WHERE apartment_id = ?', [$aptId]);
-        db_exec('DELETE FROM house_rules WHERE apartment_id = ?', [$aptId]);
-        db_exec('DELETE FROM apartments WHERE id = ?', [$aptId]);
+        db_execute('DELETE FROM apartment_translations WHERE apartment_id = ?', [$aptId]);
+        db_execute('DELETE FROM images WHERE apartment_id = ?', [$aptId]);
+        db_execute('DELETE FROM apartment_amenities WHERE apartment_id = ?', [$aptId]);
+        db_execute('DELETE FROM house_rules WHERE apartment_id = ?', [$aptId]);
+        db_execute('DELETE FROM apartments WHERE id = ?', [$aptId]);
 
         admin_record_audit($user['id'], 'apartment_deleted', ['apartment_id' => $aptId, 'name' => $apartment['name']]);
 

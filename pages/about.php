@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config/bootstrap.php';
+require_once __DIR__ . '/../config/bootstrap.php';
 site_head(t('page.about.title') . ' - ' . t('app.name'));
 ?>
 

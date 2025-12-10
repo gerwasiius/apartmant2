@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Ako direktno pristupam /index.php ili / - prosledi na pages/index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^/?$ pages/index.php [L]
+    
+    # Ako pristupam /apartments.php - prosledi na pages/apartments.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^apartments\.php$ pages/apartments.php [L]
+    
+    # Ako pristupam /apartment.php - prosledi na pages/apartment.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^apartment\.php$ pages/apartment.php [L]
+    
+    # Ako pristupam /about.php - prosledi na pages/about.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^about\.php$ pages/about.php [L]
+    
+    # Ako pristupam /contact.php - prosledi na pages/contact.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^contact\.php$ pages/contact.php [L]
+</IfModule>

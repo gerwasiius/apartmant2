@@ -35,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             if ($aptId) {
                 // Update
-                db_exec(
+                db_execute(
                     'UPDATE apartments SET name = ?, description = ?, price = ?, beds = ?, baths = ?, guests = ? WHERE id = ?',
                     [$name, $description, $price, $beds, $baths, $guests, $aptId]
                 );
 
                 // Update translation (English as default)
-                db_exec(
+                db_execute(
                     'UPDATE apartment_translations SET name = ?, sub_name = ?, description = ?, long_description = ? WHERE apartment_id = ? AND lang = ?',
                     [$name, $subName, $description, $longDescription, $aptId, 'en']
                 );
@@ -51,14 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             } else {
                 // Create
-                db_exec(
+                db_execute(
                     'INSERT INTO apartments (name, description, price, beds, baths, guests) VALUES (?, ?, ?, ?, ?, ?)',
                     [$name, $description, $price, $beds, $baths, $guests]
                 );
                 $newId = db_fetch_one('SELECT LAST_INSERT_ID() as id')['id'];
 
                 // Create translation (English as default)
-                db_exec(
+                db_execute(
                     'INSERT INTO apartment_translations (apartment_id, lang, name, sub_name, description, long_description) VALUES (?, ?, ?, ?, ?, ?)',
                     [$newId, 'en', $name, $subName, $description, $longDescription]
                 );

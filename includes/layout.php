@@ -67,6 +67,32 @@ function site_head(string $title = 'Apartmani'): void
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{$title}</title>
+  <!-- CSS varijable - moraju biti učitane prije Tailwind-a -->
+  <style>
+    :root{
+      --background: 43 38% 95%;
+      --border: 39 30% 85%;
+      --med-blue: 201 48% 44%;
+      --mediterranean-beige: #F5EFE0;
+      --mediterranean-sand:  #E8DCCA;
+      --mediterranean-sand-dark: #ede8de;
+      --mediterranean-blue:  #3A7CA5;
+      --mediterranean-blue-dark: #2A5F8F;
+      --mediterranean-orange: #E67E22;
+      --mediterranean-orange-dark: #cf6d19;
+    }
+    .bg-mediterranean-beige { background-color: var(--mediterranean-beige); }
+    .border-mediterranean-sand { border-color: var(--mediterranean-sand); }
+    .bg-mediterranean-sand-dark { background-color: var(--mediterranean-sand-dark); }
+    .text-mediterranean-blue { color: var(--mediterranean-blue); }
+    .bg-mediterranean-blue { background-color: var(--mediterranean-blue); }
+    .bg-mediterranean-orange { background-color: var(--mediterranean-orange); }
+    .hover\:bg-mediterranean-orange-dark:hover { background-color: var(--mediterranean-orange-dark); }
+    .header-glass { background-color: rgba(245, 239, 224, 0.95); backdrop-filter: blur(8px); }
+    @supports (backdrop-filter: blur(1px)) { .header-glass { background-color: rgba(245, 239, 224, 0.80); } }
+    .container { margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+    @media (min-width: 768px){ .container{ padding-left: 2rem; padding-right: 2rem; } }
+  </style>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -79,7 +105,7 @@ function site_head(string $title = 'Apartmani'): void
 <body class="bg-mediterranean-beige text-gray-900">
   <header class="sticky top-0 z-40 w-full border-b border-mediterranean-sand header-glass">
     <div class="container flex h-16 items-center justify-between">
-      <a href="{$base}/index.php" class="flex items-center space-x-2">
+      <a href="{$base}/" class="flex items-center space-x-2">
         <div class="relative hidden md:block h-[50px] w-[120px] overflow-hidden">
           <img
             src="https://sssef5nrxfikvijy.public.blob.vercel-storage.com/palm-beach-logo-1-o%20Kopie-02%20mob%20blau-02-55IjFxINMD4fA8tYUd47aMhzYXriaZ.svg"
@@ -96,11 +122,11 @@ function site_head(string $title = 'Apartmani'): void
       </a>
 
       <nav class="hidden md:flex items-center gap-6">
-        <a href="{$base}/index.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navHome}</a>
-        <a href="{$base}/apartments.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navApts}</a>
-        <a href="{$base}/about.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navAbout}</a>
-        <a href="{$base}/contact.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navContact}</a>
-        <a href="{$base}/contact.php"
+        <a href="{$base}/" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navHome}</a>
+        <a href="{$base}/pages/apartments.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navApts}</a>
+        <a href="{$base}/pages/about.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navAbout}</a>
+        <a href="{$base}/pages/contact.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">{$navContact}</a>
+        <a href="{$base}/pages/contact.php"
            class="inline-flex items-center gap-2 rounded-full bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm font-medium">
           <span class="inline-block w-2 h-2 rounded-full bg-white/90"></span>
           {$navBookNow}
@@ -133,10 +159,10 @@ function site_head(string $title = 'Apartmani'): void
 
     <div id="mobileNav" class="md:hidden hidden border-t border-mediterranean-sand bg-mediterranean-beige/95 backdrop-blur">
       <nav class="container mx-auto px-4 py-3 flex flex-col gap-3">
-        <a href="{$base}/index.php" class="text-sm font-medium">{$navHome}</a>
-        <a href="{$base}/apartments.php" class="text-sm font-medium">{$navApts}</a>
-        <a href="{$base}/about.php" class="text-sm font-medium">{$navAbout}</a>
-        <a href="{$base}/contact.php"
+        <a href="{$base}/" class="text-sm font-medium">{$navHome}</a>
+        <a href="{$base}/pages/apartments.php" class="text-sm font-medium">{$navApts}</a>
+        <a href="{$base}/pages/about.php" class="text-sm font-medium">{$navAbout}</a>
+        <a href="{$base}/pages/contact.php"
            class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-mediterranean-orange hover:bg-mediterranean-orange-dark text-white px-4 py-2 text-sm font-medium">
           <span class="inline-block w-2 h-2 rounded-full bg-white/90"></span>
           {$navBookNow}
@@ -217,10 +243,10 @@ function site_footer(): void
       <!-- Quick links -->
       <nav class="foot-col">
         <ul class="foot-links">
-          <li><a href="{$base}/index.php">{$fHome}</a></li>
-          <li><a href="{$base}/apartments.php">{$fApts}</a></li>
-          <li><a href="{$base}/about.php">{$fAbout}</a></li>
-          <li><a href="{$base}/contact.php">{$fCont}</a></li>
+          <li><a href="{$base}/">{$fHome}</a></li>
+          <li><a href="{$base}/pages/apartments.php">{$fApts}</a></li>
+          <li><a href="{$base}/pages/about.php">{$fAbout}</a></li>
+          <li><a href="{$base}/pages/contact.php">{$fCont}</a></li>
         </ul>
       </nav>
 

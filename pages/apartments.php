@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config/bootstrap.php';
+require_once __DIR__ . '/../config/bootstrap.php';
 $apartments = load_apartments();
 $sortParam = $_GET['sort'] ?? 'asc';
 $fromParam = $_GET['from'] ?? '';
@@ -143,7 +143,7 @@ site_head(t('page.apartments.title') . ' - Apartmani');
               $detailParams['to'] = $toParam;
             if (!empty($guestsParam))
               $detailParams['guests'] = $guestsParam;
-            $detailHref = url('apartment.php?' . http_build_query($detailParams));
+            $detailHref = url('pages/apartment.php?' . http_build_query($detailParams));
             ?>
 
             <!-- VEĆA KARTICA -->
@@ -195,21 +195,21 @@ site_head(t('page.apartments.title') . ' - Apartmani');
                   <!-- META: kreveta / kupaonica / gosti -->
                   <div class="flex flex-wrap items-center gap-4 text-sm text-gray-800">
                     <div class="flex items-center gap-1">
-                        <img src="<?= htmlspecialchars('assets/images/beds.svg'); ?>" alt="beds" class="meta-icon"> 
+                        <img src="<?= htmlspecialchars(url('assets/images/beds.svg')); ?>" alt="beds" class="meta-icon"> 
                       <?= htmlspecialchars(
                         t('page.apartments.beds', ['count' => (int) ($a['beds'] ?? 0)])
                       ); ?>
                     </div>
 
                     <div class="flex items-center gap-1">
-                      <img src="<?= htmlspecialchars('assets/images/baths.svg'); ?>" alt="baths" class="meta-icon"> 
+                      <img src="<?= htmlspecialchars(url('assets/images/baths.svg')); ?>" alt="baths" class="meta-icon"> 
                       <?= htmlspecialchars(
                         t('page.apartments.baths', ['count' => (int) ($a['baths'] ?? 0)])
                       ); ?>
                     </div>
 
                     <div class="flex items-center gap-1">
-                      <img src="<?= htmlspecialchars('assets/images/guests.svg'); ?>" alt="guests" class="meta-icon"> 
+                      <img src="<?= htmlspecialchars(url('assets/images/guests.svg')); ?>" alt="guests" class="meta-icon"> 
                       <?= htmlspecialchars(
                         t('page.apartments.guests', ['count' => (int) ($a['guests'] ?? 0)])
                       ); ?>

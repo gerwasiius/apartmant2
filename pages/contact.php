@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config/bootstrap.php';
+require_once __DIR__ . '/../config/bootstrap.php';
 site_head(t('page.contact.title') . ' - ' . t('app.name'));
 ?>
 <main class="min-h-[60vh] bg-[#FAF7EE] py-10">
