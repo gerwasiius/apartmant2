@@ -73,30 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-?>
-<!doctype html>
-<html lang="hr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin - <?= $aptId ? 'Uređivanje' : 'Novi' ?> apartman</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body class="bg-mediterranean-beige text-gray-900">
-  <header class="border-b border-mediterranean-sand header-glass">
-    <div class="container flex h-16 items-center justify-between">
-      <a href="../index.php" class="text-lg font-bold text-mediterranean-blue">Majstorić Apartments — Admin</a>
-      <div class="flex items-center gap-4">
-        <span class="text-sm"><?= htmlspecialchars($user['email'] ?? 'Admin') ?></span>
-        <a href="logout.php" class="ap-btn">Odjava</a>
-      </div>
-    </div>
-  </header>
+$pageTitle = $aptId ? 'Uređivanje apartmana' : 'Novi apartman';
+admin_head($pageTitle);
 
-  <div class="container py-8">
+?>
+  <div class="container px-4 md:px-0 py-4 md:py-8">
     <div class="max-w-2xl">
-      <a href="apartments.php" class="text-mediterranean-blue mb-4 inline-block">← Nazad na apartmane</a>
+      <a href="apartments.php" class="text-mediterranean-blue mb-4 inline-block text-sm">← Nazad</a>
 
       <div class="ap-card">
         <div class="ap-card-header">
@@ -184,7 +167,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?php endif; ?>
     </div>
   </div>
-
-  <footer class="container text-center py-6 text-sm text-gray-600 mt-8">&copy; <?= date('Y') ?> Majstorić Apartments</footer>
-</body>
-</html>
+<?php admin_footer(); ?>

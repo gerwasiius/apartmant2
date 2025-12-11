@@ -45,23 +45,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-mediterranean-beige text-gray-900">
   <header class="border-b border-mediterranean-sand header-glass">
-    <div class="container flex h-16 items-center">
-      <a href="../index.php" class="text-lg font-bold text-mediterranean-blue">Majstorić Apartments — Admin</a>
+    <div class="container px-4 md:px-0 flex h-16 items-center">
+      <a href="../index.php" class="text-sm md:text-lg font-bold text-mediterranean-blue truncate">Apartmani — Admin</a>
     </div>
   </header>
 
-  <main class="container py-8">
+  <main class="container px-4 md:px-0 py-8 md:py-12">
     <div class="max-w-md mx-auto">
       <div class="ap-card">
         <div class="ap-card-body">
-          <h1 class="text-2xl font-bold">Registracija admin korisnika (privremeno)</h1>
+          <h1 class="text-lg md:text-xl font-bold">Registracija admin (privremeno)</h1>
 
           <?php if ($success): ?>
-            <p class="text-green-700 mt-3"><?= htmlspecialchars($success) ?></p>
+            <p class="text-green-700 mt-3 text-sm"><?= htmlspecialchars($success) ?></p>
           <?php endif; ?>
 
           <?php if ($errors): ?>
-            <ul class="text-red-600 mt-3 list-disc pl-5">
+            <ul class="text-red-600 mt-3 text-sm list-disc pl-5">
               <?php foreach ($errors as $err): ?>
                 <li><?= htmlspecialchars($err) ?></li>
               <?php endforeach; ?>
@@ -70,24 +70,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <form method="post" class="mt-4 grid gap-4">
             <div class="ap-field">
-              <label class="ap-label">Email</label>
-              <input class="ap-input" type="email" name="email" required>
+              <label class="ap-label text-sm">Email</label>
+              <input class="ap-input text-sm" type="email" name="email" required>
             </div>
             <div class="ap-field">
-              <label class="ap-label">Lozinka</label>
-              <input class="ap-input" type="password" name="password" required>
+              <label class="ap-label text-sm">Lozinka</label>
+              <input class="ap-input text-sm" type="password" name="password" required>
             </div>
             <div>
-              <button class="ap-btn w-full" type="submit">Kreiraj korisnika</button>
+              <button class="ap-btn w-full text-sm" type="submit">Kreiraj</button>
             </div>
           </form>
 
-          <p class="mt-4 text-sm"><a href="login.php" class="text-mediterranean-blue">Prijava</a></p>
+          <p class="mt-4 text-xs md:text-sm"><a href="login.php" class="text-mediterranean-blue">Prijava</a></p>
         </div>
       </div>
     </div>
   </main>
 
-  <footer class="container text-center py-6 text-sm text-gray-600">&copy; <?= date('Y') ?> Majstorić Apartments</footer>
+  <footer class="container px-4 md:px-0 text-center py-6 text-xs md:text-sm text-gray-600">&copy; <?= date('Y') ?> Apartmani</footer>
 </body>
 </html>

@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+// Load app bootstrap (APP_BASE, helpers, includes/layout.php which defines admin_head())
+require_once __DIR__ . '/../config/bootstrap.php';
+
 session_start();
 
 require_once __DIR__ . '/db.php';

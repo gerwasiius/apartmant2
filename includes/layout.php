@@ -221,6 +221,119 @@ function site_head(string $title = 'Apartmani'): void
 HTML;
 }
 
+function admin_head(string $title = 'Admin'): void
+{
+  $base = rtrim(APP_BASE, '/');
+
+  // Determine logged admin email if available
+  $userEmail = 'Admin';
+  if (function_exists('adminUser')) {
+    try {
+      $user = adminUser();
+      $userEmail = $user['email'] ?? 'Admin';
+    } catch (Exception $e) {
+      // ignore
+    }
+  }
+
+  $escTitle = htmlspecialchars($title, ENT_QUOTES);
+  $escUser = htmlspecialchars($userEmail, ENT_QUOTES);
+
+  echo <<<HTML
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — {$escTitle}</title>
+  <!-- CSS varijable - moraju biti učitane prije Tailwind-a -->
+  <style>
+    :root{
+      --background: 43 38% 95%;
+      --border: 39 30% 85%;
+      --med-blue: 201 48% 44%;
+      --mediterranean-beige: #F5EFE0;
+      --mediterranean-sand:  #E8DCCA;
+      --mediterranean-sand-dark: #ede8de;
+      --mediterranean-blue:  #3A7CA5;
+      --mediterranean-blue-dark: #2A5F8F;
+      --mediterranean-orange: #E67E22;
+      --mediterranean-orange-dark: #cf6d19;
+    }
+    .bg-mediterranean-beige { background-color: var(--mediterranean-beige); }
+    .border-mediterranean-sand { border-color: var(--mediterranean-sand); }
+    .bg-mediterranean-sand-dark { background-color: var(--mediterranean-sand-dark); }
+    .text-mediterranean-blue { color: var(--mediterranean-blue); }
+    .bg-mediterranean-blue { background-color: var(--mediterranean-blue); }
+    .bg-mediterranean-orange { background-color: var(--mediterranean-orange); }
+    .hover\:bg-mediterranean-orange-dark:hover { background-color: var(--mediterranean-orange-dark); }
+    .header-glass { background-color: rgba(245, 239, 224, 0.95); backdrop-filter: blur(8px); }
+    @supports (backdrop-filter: blur(1px)) { .header-glass { background-color: rgba(245, 239, 224, 0.80); } }
+    .container { margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+    @media (min-width: 768px){ .container{ padding-left: 2rem; padding-right: 2rem; } }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{$base}/assets/css/style.css">
+</head>
+<body class="bg-mediterranean-beige text-gray-900">
+  <header class="sticky top-0 z-40 w-full border-b border-mediterranean-sand header-glass">
+    <div class="container px-4 md:px-0 flex h-16 items-center justify-between">
+      <a href="{$base}/admin/index.php" class="text-sm md:text-lg font-bold text-mediterranean-blue truncate">Apartmani — Admin</a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="{$base}/admin/index.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Dashboard</a>
+        <a href="{$base}/admin/apartments.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Apartmani</a>
+        <a href="{$base}/admin/audit.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Audit</a>
+        <a href="{$base}/admin/settings.php" class="text-sm font-medium transition-colors hover:text-mediterranean-blue">Podešavanja</a>
+      </nav>
+
+      <!-- Mobile/Desktop actions -->
+      <div class="flex items-center gap-2 md:gap-4">
+        <span class="text-xs md:text-sm truncate">{$escUser}</span>
+        <a href="{$base}/admin/logout.php" class="ap-btn text-xs md:text-sm px-2 md:px-4 py-1 md:py-2">Odjava</a>
+        <button id="adminMenuBtn" class="md:hidden inline-flex items-center justify-center rounded-md p-2 hover:bg-black/5" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="adminMobileNav" class="md:hidden hidden border-t border-mediterranean-sand bg-mediterranean-beige/95 backdrop-blur">
+      <nav class="container px-4 py-3 flex flex-col gap-2">
+        <a href="{$base}/admin/index.php" class="px-3 py-2 text-sm font-medium rounded hover:bg-black/5">Dashboard</a>
+        <a href="{$base}/admin/apartments.php" class="px-3 py-2 text-sm font-medium rounded hover:bg-black/5">Apartmani</a>
+        <a href="{$base}/admin/audit.php" class="px-3 py-2 text-sm font-medium rounded hover:bg-black/5">Audit</a>
+        <a href="{$base}/admin/settings.php" class="px-3 py-2 text-sm font-medium rounded hover:bg-black/5">Podešavanja</a>
+      </nav>
+    </div>
+  </header>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.getElementById('adminMenuBtn');
+      const nav = document.getElementById('adminMobileNav');
+      if (btn && nav) {
+        btn.addEventListener('click', () => nav.classList.toggle('hidden'));
+      }
+    });
+  </script>
+HTML;
+}
+
+function admin_footer(): void
+{
+  $year = date('Y');
+  $escYear = htmlspecialchars((string)$year, ENT_QUOTES);
+  echo <<<HTML
+  <footer class="container px-4 md:px-0 text-center py-6 text-xs md:text-sm text-gray-600 mt-8">&copy; {$escYear} Apartmani</footer>
+</body>
+</html>
+HTML;
+}
+
 function site_footer(): void
 {
   $base = rtrim(APP_BASE, '/');

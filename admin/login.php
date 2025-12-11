@@ -99,33 +99,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-?>
-<!doctype html>
-<html lang="hr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin - Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/cta.css">
-  <link rel="stylesheet" href="../assets/css/location.css">
-</head>
-<body class="bg-mediterranean-beige text-gray-900">
-  <header class="border-b border-mediterranean-sand header-glass">
-    <div class="container flex h-16 items-center">
-      <a href="../index.php" class="text-lg font-bold text-mediterranean-blue">Majstorić Apartments — Admin</a>
-    </div>
-  </header>
+admin_head('Admin Prijava');
 
-  <main class="container py-8">
+?>
+  <main class="container px-4 md:px-0 py-8 md:py-12">
     <div class="max-w-md mx-auto">
       <div class="ap-card">
         <div class="ap-card-body">
-          <h1 class="text-2xl font-bold">Admin Prijava</h1>
+          <h1 class="text-xl md:text-2xl font-bold">Admin Prijava</h1>
 
           <?php if ($errors): ?>
-            <ul class="text-red-600 mt-3 list-disc pl-5">
+            <ul class="text-red-600 mt-3 text-sm list-disc pl-5">
               <?php foreach ($errors as $err): ?>
                 <li><?= htmlspecialchars($err) ?></li>
               <?php endforeach; ?>
@@ -134,24 +118,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <form method="post" class="mt-4 grid gap-4">
             <div class="ap-field">
-              <label class="ap-label">Email</label>
-              <input class="ap-input" type="email" name="email" required>
+              <label class="ap-label text-sm">Email</label>
+              <input class="ap-input text-sm" type="email" name="email" required>
             </div>
             <div class="ap-field">
-              <label class="ap-label">Lozinka</label>
-              <input class="ap-input" type="password" name="password" required>
+              <label class="ap-label text-sm">Lozinka</label>
+              <input class="ap-input text-sm" type="password" name="password" required>
             </div>
             <div>
-              <button class="ap-btn w-full" type="submit">Prijavi se</button>
+              <button class="ap-btn w-full text-sm" type="submit">Prijavi se</button>
             </div>
           </form>
 
-          <p class="mt-4 text-sm"><a href="register.php" class="text-mediterranean-blue">Kreiraj admin korisnika (privremeno)</a></p>
+          <p class="mt-4 text-xs md:text-sm"><a href="register.php" class="text-mediterranean-blue">Kreiraj admin korisnika (privremeno)</a></p>
         </div>
       </div>
     </div>
   </main>
-
-  <footer class="container text-center py-6 text-sm text-gray-600">&copy; <?= date('Y') ?> Majstorić Apartments</footer>
-</body>
-</html>
+<?php admin_footer(); ?>
